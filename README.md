@@ -27,7 +27,7 @@
 - master : Origin, logger, config
 - master -> cqrs : null
 - master -> microservice : null
-- master -> typeORM : null
+- master -> typeorm : null
 - master -> prisma : null
 - master -> authen, athor : null
 - master -> caching : redis
