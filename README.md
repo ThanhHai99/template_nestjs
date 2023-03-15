@@ -25,9 +25,9 @@
 ## Feature branch
 
 - master : Origin, logger, config
-- master -> cqrs : null
+- master -> cqrs : cqrs
 - master -> microservice : null
-- master -> typeORM : null
+- master -> typeorm : TypeORM, PostgreSQL
 - master -> prisma : null
 - master -> authen, athor : null
 - master -> caching : redis
