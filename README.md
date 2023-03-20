@@ -37,6 +37,8 @@
 - master -> oauth : OAuth2
 - master -> docker : null
 - master -> cicd : CI/CD
+- master -> elasticsearch : null
+- master -> pubsub : null
 
 ## Version
 
