@@ -26,12 +26,17 @@
 
 - master : Origin, logger, config
 - master -> cqrs : cqrs
+- master -> configs : null
 - master -> microservice : null
 - master -> typeorm : TypeORM, PostgreSQL
 - master -> prisma : null
-- master -> authen, athor : null
 - master -> caching : redis
 - master -> queuing : rabbitmq
+- master -> mail : send mail
+- master -> rbac : authentication, authorization, permission,
+- master -> oauth : OAuth2
+- master -> docker : null
+- master -> cicd : CI/CD
 
 ## Version
 
