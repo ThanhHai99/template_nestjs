@@ -64,8 +64,8 @@ export class RabbitmqService {
 
       this.logger.log('Send message to RabbitMQ successfully')
       return true
-    } catch (err) {
-      this.logger.error(JSON.stringify(err))
+    } catch (e0) {
+      this.logger.error(JSON.stringify(e0))
       return false
     }
   }
@@ -82,8 +82,8 @@ export class RabbitmqService {
   //     });
 
   //     return null;
-  //   } catch (err) {
-  //     this.logger.error(JSON.stringify(err), RabbitMQUtil.name);
+  //   } catch (e0) {
+  //     this.logger.error(JSON.stringify(e0), RabbitMQUtil.name);
   //     return null;
   //   }
   // }
@@ -93,8 +93,8 @@ export class RabbitmqService {
   //     const channel = await connection.createChannel();
   //     await channel.assertQueue(queue);
   //     channel.ack(message);
-  //   } catch (error) {
-  //     this.logger.error(JSON.stringify(error), RabbitMQUtil.name);
+  //   } catch (e0) {
+  //     this.logger.error(JSON.stringify(e0), RabbitMQUtil.name);
   //   }
   // }
 }
