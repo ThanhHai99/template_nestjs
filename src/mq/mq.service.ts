@@ -23,8 +23,8 @@ export class MqService {
           console.log(messageBody)
           console.log('processing message done')
           channel.ack(message) // IMPORTANT: remove message into rabbitmq
-        } catch (mqError) {
-          return mqError
+        } catch (e1) {
+          return e1
           //   Push to another queue
         }
       })
