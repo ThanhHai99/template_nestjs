@@ -2,16 +2,14 @@ import { RabbitmqService } from '@libs/rabbitmq'
 import { Injectable, Logger } from '@nestjs/common'
 
 @Injectable()
-export class AppService {
-  constructor() {}
-
-  private readonly logger = new Logger(AppService.name)
-
-  public getHello(): string {
-    return 'Hello World!'
+export class MqService {
+  constructor() {
+    this.consumeMQ()
   }
 
-  async sendMQ(): Promise<boolean> {
+  private readonly logger = new Logger(MqService.name)
+
+  async consumeMQ(): Promise<boolean> {
     try {
       const conn = await RabbitmqService.getConnection()
       const queueName = 'queue-0'
@@ -19,19 +17,19 @@ export class AppService {
       await channel.assertQueue(queueName)
       await channel.consume(queueName, async (message) => {
         try {
-          this.logger.log(message.content.toString())
+          this.logger.log(message.content.toString(), MqService.name + '.receiverMQ: ')
           const messageBody: any = JSON.parse(message.content.toString())
           console.log('processing message...')
           console.log(messageBody)
           console.log('processing message done')
           channel.ack(message) // IMPORTANT: remove message into rabbitmq
-        } catch (e0) {
-          return e0
+        } catch (mqError) {
+          return mqError
           //   Push to another queue
         }
       })
-    } catch (e) {
-      return e
+    } catch (e0) {
+      return e0
     }
   }
 }
