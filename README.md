@@ -26,22 +26,22 @@
 
 - master : Origin, logger, config
 - master -> cqrs : cqrs
-- master -> configs : null
-- master -> microservice : null
+- master -> configs :
+- master -> microservice :
 - master -> typeorm : TypeORM, PostgreSQL
-- master -> prisma : null
+- master -> prisma :
 - master -> caching : redis
 - master -> queuing : rabbitmq, (kafka)
 - master -> mail : send mail
 - master -> rbac : authentication, authorization, permission
-- master -> oauth : OAuth2
-- master -> docker : null
-- master -> cicd : CI/CD
-- masrer -> nx : null
-- master -> elasticsearch : null
-- master -> pubsub : null
-- master -> mongoose : null
-- master -> grpc : gRPC
+- master -> oauth :
+- master -> docker :
+- master -> cicd :
+- masrer -> nx :
+- master -> elasticsearch :
+- master -> pubsub :
+- master -> mongoose :
+- master -> grpc :
 
 ## Version
 
