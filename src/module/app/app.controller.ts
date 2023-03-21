@@ -9,4 +9,9 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello()
   }
+
+  @Get('send_mail')
+  async sendMail() {
+    return await this.appService.sendMail()
+  }
 }
