@@ -31,14 +31,17 @@
 - master -> typeorm : TypeORM, PostgreSQL
 - master -> prisma : null
 - master -> caching : redis
-- master -> queuing : rabbitmq
+- master -> queuing : rabbitmq, (kafka)
 - master -> mail : send mail
-- master -> rbac : authentication, authorization, permission,
+- master -> rbac : authentication, authorization, permission
 - master -> oauth : OAuth2
 - master -> docker : null
 - master -> cicd : CI/CD
+- masrer -> nx : null
 - master -> elasticsearch : null
 - master -> pubsub : null
+- master -> mongoose : null
+- master -> grpc : gRPC
 
 ## Version
 
