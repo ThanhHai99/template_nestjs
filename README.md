@@ -42,6 +42,7 @@
 - master -> pubsub :
 - master -> mongoose :
 - master -> grpc :
+- master -> firebase : 
 
 ## Version
 
