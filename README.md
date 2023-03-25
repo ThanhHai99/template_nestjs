@@ -37,7 +37,7 @@
 - master -> oauth :
 - master -> docker :
 - master -> cicd :
-- masrer -> nx :
+- masrer -> nx : nx workspace
 - master -> elasticsearch :
 - master -> pubsub :
 - master -> mongoose :
