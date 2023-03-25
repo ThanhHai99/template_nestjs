@@ -39,10 +39,10 @@
 - master -> cicd :
 - masrer -> nx : nx workspace
 - master -> elasticsearch :
-- master -> pubsub :
+- master -> pubsub : pubsub, nats
 - master -> mongoose :
 - master -> grpc :
-- master -> firebase : 
+- master -> firebase :
 
 ## Version
 
