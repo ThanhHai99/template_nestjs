@@ -35,7 +35,7 @@
 - master -> mail : send mail
 - master -> rbac : authentication, authorization, permission
 - master -> oauth :
-- master -> docker :
+- master -> docker : dockerfile, docker-compose
 - master -> cicd : cicd
 - masrer -> nx : nx workspace
 - master -> elasticsearch :

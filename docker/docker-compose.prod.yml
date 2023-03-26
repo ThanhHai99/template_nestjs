@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  app:
+    container_name: Template_NestJS
+    build:
+      context: ../
+      network: host
+    ports:
+      - '80:80'
