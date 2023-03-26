@@ -27,7 +27,7 @@
 - master : Origin, logger, config
 - master -> cqrs : cqrs
 - master -> configs :
-- master -> microservice : pubsub, nats, microservice
+- master -> microservice : nx workspace, pubsub, nats, microservice
 - master -> typeorm : TypeORM, PostgreSQL
 - master -> prisma :
 - master -> caching : redis
