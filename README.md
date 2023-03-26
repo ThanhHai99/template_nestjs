@@ -24,7 +24,7 @@
 
 ## Feature branch
 
-- master : Origin, logger, config
+- master : Origin, logger, config, dockerfile, docker-compose
 - master -> cqrs : cqrs
 - master -> configs :
 - master -> microservice : pubsub, nats, microservice
@@ -35,7 +35,6 @@
 - master -> mail : send mail
 - master -> rbac : authentication, authorization, permission
 - master -> oauth :
-- master -> docker : dockerfile, docker-compose
 - master -> cicd : cicd
 - masrer -> nx : nx workspace
 - master -> elasticsearch :
