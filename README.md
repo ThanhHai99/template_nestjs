@@ -36,7 +36,7 @@
 - master -> rbac : authentication, authorization, permission
 - master -> oauth :
 - master -> docker :
-- master -> cicd :
+- master -> cicd : cicd
 - masrer -> nx : nx workspace
 - master -> elasticsearch :
 - master -> mongoose :
