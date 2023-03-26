@@ -13,4 +13,3 @@ async function bootstrap() {
   logger.log(`🚀 Application is running on: ${await app.getUrl()}/ 😁😁`)
 }
 bootstrap()
-
