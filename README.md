@@ -42,6 +42,7 @@
 - master -> mongoose :
 - master -> grpc :
 - master -> firebase :
+- master -> graphQL:
 
 ## Version
 
