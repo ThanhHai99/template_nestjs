@@ -15,9 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Start containers
-        run: docker-compose -f "docker/docker-compose.prod.yml" up -d --build
-
       - name: Install node
         uses: actions/setup-node@v1
         with:
@@ -26,9 +23,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-    # - name: Run tests
-    #   run: npm run test
+      - name: Run tests
+        run: npm run test
 
-    # - name: Stop containers
-    #   if: always()
-    #   run: docker-compose -f "docker/docker-compose.prod.yml" down
+      - name: Start containers
+        run: docker-compose -f "docker/docker-compose.prod.yml" up -d --build
+
+      # - name: Stop containers
+      #   if: always()
+      #   run: docker-compose -f "docker/docker-compose.prod.yml" down
