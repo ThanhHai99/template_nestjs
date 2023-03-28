@@ -4,5 +4,12 @@ export default () => {
       env: process.env.APP_ENV || 'local',
       port: process.env.APP_PORT || 80,
     },
+    db: {
+      host: '127.0.0.1',
+      port: 5432,
+      user: 'root',
+      pass: 'root',
+      db: 'template_nestjs',
+    },
   }
 }

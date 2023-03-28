@@ -33,7 +33,7 @@
 - master -> caching : redis
 - master -> queuing : rabbitmq, (kafka)
 - master -> mail : send mail
-- master -> rbac : authentication, authorization, permission
+- master -> rbac : authentication, authorization, permission, postgresql, prisma
 - master -> oauth :
 - master -> cicd : cicd
 - masrer -> nx : nx workspace
