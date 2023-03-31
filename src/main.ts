@@ -1,15 +1,15 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './module/app/app.module'
-import { Logger } from '@nestjs/common'
+import { Logger, INestApplication } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
+async function bootstrap(): Promise<void> {
+  const app: INestApplication = await NestFactory.create(AppModule)
   const logger = new Logger('MainServer')
   const configService = app.get(ConfigService)
-  const port = configService.get<number>('app.port')
+  const port: number = configService.get<number>('app.port')
 
   await app.listen(port)
-  logger.log(`🚀 Application is running on: http://localhost:${port}/ 😁😁`)
+  logger.log(`🚀 Application is running on: ${await app.getUrl()} 😁😁`)
 }
 bootstrap()

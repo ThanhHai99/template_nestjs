@@ -1,25 +1,53 @@
-import { Injectable } from '@nestjs/common'
-import { CreateUserDto, UpdateUserDto } from './user.dto'
+import { Injectable, HttpStatus, HttpException } from '@nestjs/common'
+import { user } from '@prisma/client'
+import { BodyRegister } from 'src/module/auth/auth.dto'
+import { PrismaService } from '../prisma/prisma.service'
+import * as bcrypt from 'bcryptjs'
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user'
+  constructor(private readonly db: PrismaService) {}
+
+  async findByUsernameAndSelectRole(username: string): Promise<user | any> {
+    return await this.db.user.findUnique({
+      where: { username: username },
+      select: {
+        role: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+    })
   }
 
-  findAll() {
-    return `This action returns all user`
+  public async create(data: BodyRegister): Promise<any> {
+    const isUserExists: user = await this.findByUsername(data.username)
+    if (isUserExists) throw new HttpException('The account already in use', HttpStatus.CONFLICT)
+
+    // Create user
+    data.password = bcrypt.hashSync(data.password, 8)
+    await this.db.user
+      .create({
+        data: {
+          username: data.username,
+          password: data.password,
+        },
+      })
+      .catch((e0: any): never => {
+        throw new HttpException('The account cannot create', HttpStatus.INTERNAL_SERVER_ERROR)
+      })
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`
+  public async findByUsername(username: string): Promise<user> {
+    return await this.db.user.findUnique({
+      where: { username: username },
+    })
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`
+  public async isPasswordValid(username: string, password: string): Promise<boolean> {
+    const thisUser: user = await this.findByUsername(username)
+    return await bcrypt.compare(password, thisUser.password)
   }
 }

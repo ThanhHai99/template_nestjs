@@ -11,5 +11,9 @@ export default () => {
       pass: 'root',
       db: 'template_nestjs',
     },
+    jwt: {
+      secret_key: 'secretKey',
+      expires_in: 30000,
+    },
   }
 }

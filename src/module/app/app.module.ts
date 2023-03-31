@@ -1,5 +1,5 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
-import { AuthModule } from 'src/auth/auth.module'
+import { AuthModule } from 'src/module/auth/auth.module'
 import { LogMiddleware } from 'src/middleware/log.middleware'
 import { CoreModule } from '../core/core.module'
 import { RoleModule } from '../role/role.module'

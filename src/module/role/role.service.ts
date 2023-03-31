@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { CreateRoleDto, UpdateRoleDto } from './role.dto'
 import { RolesAsObject as initRoles, RoleIds } from 'src/util/constant/role.constant'
 import { PrismaService } from '../prisma/prisma.service'
+import { role } from '@prisma/client'
 
 @Injectable()
 export class RoleService {
@@ -19,9 +20,9 @@ export class RoleService {
 
       if (existedRoles.length < RoleIds.length) {
         const existedIds: any = existedRoles.map((e: any): any => e.id)
-        const lackingIds: Array<number> = RoleIds.filter((e) => !existedIds.includes(e))
+        const lackingIds: Array<number> = RoleIds.filter((e: number): boolean => !existedIds.includes(e))
         const lackingRoles = Object.entries(initRoles)
-          .filter((e: any) => lackingIds.includes(e[1]))
+          .filter((e: any): boolean => lackingIds.includes(e[1]))
           .map((e) => {
             return {
               id: e[1],
@@ -35,7 +36,7 @@ export class RoleService {
     }
   }
 
-  findAll(): role {
-    return this.db.role.findMany()
+  async findAll(): Promise<Array<role>> {
+    return await this.db.role.findMany()
   }
 }
