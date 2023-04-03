@@ -8,7 +8,7 @@ datasource db {
 }
 
 model role {
-  id         Int      @id(map: "PK_b36bcfe02fc8de3c57a8b2391c2") @default(autoincrement())
+  id         Int      @id(map: "PK_b36bcfe02fc8de3c57a8b2391c2")
   name       String   @unique(map: "UQ_ae4578dcaed5adff96595e61660") @db.VarChar
   created_at DateTime @default(dbgenerated("('now'::text)::timestamp(6) with time zone")) @db.Timestamp(6)
   updated_at DateTime @default(dbgenerated("('now'::text)::timestamp(6) with time zone")) @db.Timestamp(6)
