@@ -42,7 +42,7 @@
 - master -> grpc :
 - master -> firebase :
 - master -> graphQL:
-- master -> precommit:
+- master -> precommit: precommit
 - master -> interceptor: interceptor nestjs
 
 ## Version
