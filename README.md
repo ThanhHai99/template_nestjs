@@ -24,7 +24,7 @@
 
 ## Feature branch
 
-- master : Origin, logger, config, dockerfile, docker-compose
+- master : Origin, logger, config, dockerfile, docker-compose, precommit
 - master -> cqrs : cqrs
 - master -> configs :
 - master -> microservice : pubsub, nats, microservice
@@ -42,7 +42,6 @@
 - master -> grpc :
 - master -> firebase :
 - master -> graphQL:
-- master -> precommit: precommit
 - master -> interceptor: interceptor nestjs
 
 ## Version
