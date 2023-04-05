@@ -24,7 +24,7 @@
 
 ## Feature branch
 
-- master : Origin, logger, config, dockerfile, docker-compose, precommit
+- master : Origin, logger, config, dockerfile, docker-compose, precommit, prettier
 - master -> cqrs : cqrs
 - master -> configs :
 - master -> microservice : pubsub, nats, microservice
