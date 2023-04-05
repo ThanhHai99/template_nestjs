@@ -24,12 +24,12 @@
 
 ## Feature branch
 
-- master : Origin, logger, config, dockerfile, docker-compose
+- master : Origin, logger, config, dockerfile, docker-compose, precommit, prettier
 - master -> cqrs : cqrs
 - master -> configs :
 - master -> microservice : pubsub, nats, microservice
 - master -> typeorm : TypeORM, PostgreSQL
-- master -> prisma :
+- master -> prisma : prisma
 - master -> caching : redis
 - master -> queuing : rabbitmq, (kafka)
 - master -> mail : send mail
@@ -42,6 +42,7 @@
 - master -> grpc :
 - master -> firebase :
 - master -> graphQL:
+- master -> interceptor: interceptor nestjs
 
 ## Version
 
