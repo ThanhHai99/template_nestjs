@@ -29,7 +29,7 @@
 - master -> configs :
 - master -> microservice : pubsub, nats, microservice
 - master -> typeorm : TypeORM, PostgreSQL
-- master -> prisma :
+- master -> prisma : prisma
 - master -> caching : redis
 - master -> queuing : rabbitmq, (kafka)
 - master -> mail : send mail
