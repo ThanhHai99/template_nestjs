@@ -38,7 +38,7 @@
 - master -> cicd : cicd
 - masrer -> nx : nx workspace
 - master -> elasticsearch :
-- master -> mongoose :
+- master -> mongoose : mongoose, mongodb
 - master -> grpc :
 - master -> firebase :
 - master -> graphQL:
