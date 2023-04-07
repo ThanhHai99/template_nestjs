@@ -24,14 +24,25 @@
 
 ## Feature branch
 
-- master : Origin, logger, config
+- master : Origin, logger, config, dockerfile, docker-compose, precommit, prettier
 - master -> cqrs : cqrs
-- master -> microservice : null
+- master -> configs :
+- master -> microservice : pubsub, nats, microservice
 - master -> typeorm : TypeORM, PostgreSQL
-- master -> prisma : null
-- master -> authen, athor : null
+- master -> prisma : prisma
 - master -> caching : redis
-- master -> queuing : rabbitmq
+- master -> queuing : rabbitmq, (kafka)
+- master -> mail : send mail
+- master -> rbac : authentication, authorization, permission
+- master -> oauth :
+- master -> cicd : cicd
+- masrer -> nx : nx workspace
+- master -> elasticsearch :
+- master -> mongoose : mongoose, mongodb
+- master -> grpc :
+- master -> firebase :
+- master -> graphQL:
+- master -> interceptor: interceptor nestjs
 
 ## Version
 
