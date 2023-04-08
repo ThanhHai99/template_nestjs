@@ -9,12 +9,13 @@ export class UserService {
   constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
 
   async create(createUserDto: CreateUserDto) {
-    return await this.userModel.create(createUserDto)
+    return await this.userModel.create({ ...createUserDto })
     // return 'This action adds a new user'
   }
 
-  findAll() {
-    return `This action returns all user`
+  async findAll() {
+    return await this.userModel.find()
+    // return `This action returns all user`
   }
 
   findOne(id: number) {
@@ -25,7 +26,12 @@ export class UserService {
     return `This action updates a #${id} user`
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    return await this.userModel.deleteMany({
+      username: {
+        $ne: null,
+      },
+    })
     return `This action removes a #${id} user`
   }
 }
