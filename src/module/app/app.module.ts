@@ -3,10 +3,10 @@ import { LogMiddleware } from 'src/middleware/log.middleware'
 import { CoreModule } from '../core/core.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { FileModule } from '../file/file.module'
+import { ImageModule } from '../image/image.module'
 
 @Module({
-  imports: [CoreModule, FileModule],
+  imports: [CoreModule, ImageModule],
   controllers: [AppController],
   providers: [AppService],
 })
