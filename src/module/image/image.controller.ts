@@ -14,7 +14,7 @@ export class ImageController {
 
   @Post('single')
   @UseInterceptors(
-    FileInterceptor('file', {
+    FileInterceptor('image', {
       storage: diskStorage({
         destination: './files',
         filename: (req, file, callback) => {
@@ -24,7 +24,7 @@ export class ImageController {
       fileFilter: imageFilter,
     }),
   )
-  public async uploadFile(@UploadedFile() file: Express.Multer.File) {
+  public async uploadImage(@UploadedFile() file: Express.Multer.File) {
     return {
       originalname: file.originalname,
       filename: file.filename,
@@ -33,7 +33,7 @@ export class ImageController {
 
   @Post('multi')
   @UseInterceptors(
-    FilesInterceptor('file', 100, {
+    FilesInterceptor('videos', 100, {
       storage: diskStorage({
         destination: './files',
         filename: (req, file, callback) => {
@@ -43,7 +43,7 @@ export class ImageController {
       fileFilter: imageFilter,
     }),
   )
-  public async uploadFiles(@UploadedFiles() files: Array<Express.Multer.File>) {
+  public async uploadImages(@UploadedFiles() files: Array<Express.Multer.File>) {
     return files.map((f) => {
       return {
         originalname: f.originalname,
@@ -53,7 +53,7 @@ export class ImageController {
   }
 
   @Get()
-  downloadFile(@Res({ passthrough: true }) res: Response, @Query('file') image: string) {
+  downloadFile(@Res({ passthrough: true }) res: Response, @Query('image') image: string) {
     res.set({
       'Content-Type': 'image/png',
       'Content-Disposition': `attachment; filename="${image}"`,
