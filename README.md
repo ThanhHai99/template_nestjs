@@ -43,7 +43,8 @@
 - master -> firebase :
 - master -> graphQL:
 - master -> interceptor: interceptor nestjs
-- master -> file: upload, download
+- master -> image: upload, download
+- master -> video: upload, download, streaming
 
 ## Version
 
