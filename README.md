@@ -26,7 +26,7 @@
 
 - master : Origin, logger, config, dockerfile, docker-compose, precommit, prettier
 - master -> cqrs : cqrs
-- master -> configs :
+- master -> configs : configs
 - master -> microservice : pubsub, nats, microservice
 - master -> typeorm : TypeORM, PostgreSQL
 - master -> prisma : prisma
