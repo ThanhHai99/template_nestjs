@@ -41,7 +41,7 @@
 - master -> mongoose : mongoose, mongodb
 - master -> grpc :
 - master -> firebase :
-- master -> graphQL:
+- master -> graphql:
 - master -> interceptor: interceptor nestjs
 - master -> image: upload, download
 - master -> video: upload, download, streaming
