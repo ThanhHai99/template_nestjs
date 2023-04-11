@@ -24,49 +24,38 @@
 
 ## Feature branch
 
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master --------> master | Done | Origin, Logger, Config, Dockerfile, docker-compose, Precommit, Prettier
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ----------> cqrs | Done | CQRS
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master -------> configs | Done | Configs
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master --> microservice | Done | PubSub, NATs, Microservice
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master -------> typeorm | Done | TypeORM, PostgreSQL
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master --------> prisma | Done | Prisma
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master -------> caching | Done | Redis
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master -------> queuing | Done | RabbitMQ, (kafka)
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ----------> mail | Done | Send mail
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ----------> rbac | Done | Authentication, Authorization, Permission
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ---------> oauth | ---- |
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ----------> cicd | Done | CI/CD
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ------------> nx | Done | NX Workspace
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master -> elasticsearch | ---- |
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ------> mongoose | Done | Mongoose, MongoDB
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ----------> grpc | ---- |
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ------> firebase | ---- |
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master -------> graphql | ---- |
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ---> interceptor | Done | Interceptor
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ---------> image | Done | Upload, Download
-+-------------------------+------+-----------------------------------------------------------------------------------
-| master ---------> video | Done | Upload, Download, (Streaming)
-+-------------------------+------+-----------------------------------------------------------------------------------
+| Branch         | Status     | Detail                                                                  |
+| -------------- | ---------- | ----------------------------------------------------------------------- |
+| master         | Done       | Origin, Logger, Config, Dockerfile, docker-compose, Precommit, Prettier |
+| cqrs           | Done       | CQRS                                                                    |
+| configs        | Done       | Configs                                                                 |
+| microservice   | Done       | PubSub, NATs, Microservice                                              |
+| typeorm        | Done       | TypeORM, PostgreSQL                                                     |
+| prisma         | Done       | Prisma                                                                  |
+| caching        | Done       | Redis                                                                   |
+| queuing        | Done       | RabbitMQ, (kafka)                                                       |
+| mail           | Done       | Send mail                                                               |
+| rbac           | Done       | Authentication, Authorization, Permission                               |
+| oauth          | Open       |                                                                         |
+| cicd           | Done       | CI/CD                                                                   |
+| nx             | Done       | NX Workspace                                                            |
+| elasticsearch  | Open       |                                                                         |
+| mongoose       | Done       | Mongoose, MongoDB                                                       |
+| grpc           | Done       |                                                                         |
+| firebase       | Open       |                                                                         |
+| graphql        | InProgress | GraphQL                                                                 |
+| interceptor    | Done       | Interceptor                                                             |
+| image          | Done       | Upload, Download                                                        |
+| video          | Done       | Upload, Download, (Streaming)                                           |
+| clean          | Open       | Clean architecture                                                      |
+| solid          | Open       |                                                                         |
+| observer       | Open       | [Design-Pattern] Observer Pattern                                       |
+| facade         | Open       | [Design-Pattern] Facede Pattern                                         |
+| proxy          | Open       | [Design-Pattern] Proxy Pattern                                          |
+| simple_factory | Open       | [Design-Pattern] Simple Factory Pattern                                 |
+| factory_method | Open       | [Design-Pattern] Factory Method Pattern                                 |
+| singleton      | Open       | [Design-Pattern] Singleton Pattern                                      |
+| prototype      | Open       | [Design-Pattern] Prototype Pattern                                      |
 
 ## Version
 
