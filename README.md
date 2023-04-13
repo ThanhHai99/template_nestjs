@@ -58,7 +58,7 @@
 | proxy          | Open       | [Design-Pattern] Proxy Pattern                                          |
 | simple_factory | Open       | [Design-Pattern] Simple Factory Pattern                                 |
 | factory_method | Open       | [Design-Pattern] Factory Method Pattern                                 |
-| singleton      | Open       | [Design-Pattern] Singleton Pattern                                      |
+| singleton      | Done       | [Design-Pattern] Singleton Pattern                                      |
 | prototype      | Open       | [Design-Pattern] Prototype Pattern                                      |
 
 ## Version
