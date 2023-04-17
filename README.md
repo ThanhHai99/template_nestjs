@@ -55,7 +55,7 @@
 | solid          | Open       |                                                                         |
 | observer       | Open       | [Design-Pattern] Observer Pattern                                       |
 | facade         | Open       | [Design-Pattern] Facede Pattern                                         |
-| proxy          | Open       | [Design-Pattern] Proxy Pattern                                          |
+| proxy          | InProgress | [Design-Pattern] Proxy Pattern                                          |
 | simple_factory | Open       | [Design-Pattern] Simple Factory Pattern                                 |
 | factory_method | Open       | [Design-Pattern] Factory Method Pattern                                 |
 | singleton      | Done       | [Design-Pattern] Singleton Pattern                                      |
