@@ -31,6 +31,8 @@
 | Branch         | Status     | Detail                                                                  |
 | -------------- | ---------- | ----------------------------------------------------------------------- |
 | master         | Done       | Origin, Logger, Config, Dockerfile, docker-compose, Precommit, Prettier |
+| session        | Open       | Session                                                                 |
+| cookie         | Open       | Cookie                                                                  |
 | cqrs           | Done       | CQRS                                                                    |
 | configs        | Done       | Configs                                                                 |
 | microservice   | Done       | PubSub, NATs, Microservice                                              |

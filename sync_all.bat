@@ -1,3 +1,5 @@
+start cmd /k "npm run format && exit"
+pause
 git fetch --all
 git pull --all
 git add .
