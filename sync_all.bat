@@ -1,4 +1,5 @@
 cmd \c "npm run format"
+cmd \c exit
 git fetch --all
 git pull --all
 git add .
