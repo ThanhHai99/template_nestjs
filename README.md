@@ -45,7 +45,7 @@
 | oauth          | Open       |                                                                         |
 | cicd           | Done       | CI/CD                                                                   |
 | nx             | Done       | NX Workspace                                                            |
-| elasticsearch  | InProgress | Elasticsearch                                                           |
+| elasticsearch  | Done       | Elasticsearch                                                           |
 | mongoose       | Done       | Mongoose, MongoDB                                                       |
 | grpc           | Done       |                                                                         |
 | firebase       | Open       |                                                                         |
