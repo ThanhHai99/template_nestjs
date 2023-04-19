@@ -1,6 +1,6 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
 import { LogMiddleware } from 'src/middleware/log.middleware'
-import { MqModule } from 'src/mq/mq.module'
+import { MqModule } from 'src/module/mq/mq.module'
 import { CoreModule } from '../core/core.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
