@@ -6,18 +6,30 @@ import { ElasticsearchService } from '@nestjs/elasticsearch'
 export class EsService {
   constructor(private readonly elasticsearchService: ElasticsearchService) {}
 
-  public async esIndex(idx: string, id: string, data: object): Promise<ApiResponse<Record<string, any>, Record<string, unknown>>> {
-    return await this.elasticsearchService.index({
-      index: idx,
-      id: id,
-      body: data,
-    })
+  public async esSet(idx: string, id: string, data: object): Promise<number> {
+    try {
+      return await this.elasticsearchService
+        .index({
+          index: idx,
+          id: id,
+          body: data,
+        })
+        .then((data) => {
+          return data.statusCode
+        })
+    } catch (e0) {
+      console.log(e0)
+    }
   }
 
   public async esGet(idx: string, id: string): Promise<ApiResponse<Record<string, any>, Record<string, unknown>>> {
-    return await this.elasticsearchService.get({
-      index: idx,
-      id: id,
-    })
+    try {
+      return await this.elasticsearchService.get({
+        index: idx,
+        id: id,
+      })
+    } catch (e0) {
+      console.log(e0)
+    }
   }
 }

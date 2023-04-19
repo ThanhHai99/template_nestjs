@@ -5,7 +5,7 @@ import { ApiResponse } from '@elastic/elasticsearch'
 @Injectable()
 export class AppService {
   constructor(private readonly esService: EsService) {}
-  public async setData(): Promise<Array<ApiResponse<Record<string, any>, Record<string, unknown>>>> {
+  public async setData(): Promise<Array<number>> {
     const data = [
       {
         idx: 'idx-0',
@@ -13,6 +13,7 @@ export class AppService {
         data: {
           d1: 'hihi',
           d2: 'kkk',
+          d3: 'keke',
         },
       },
       {
@@ -25,9 +26,9 @@ export class AppService {
       },
     ]
 
-    const res: Array<ApiResponse<Record<string, any>, Record<string, unknown>>> = []
+    const res = []
     data.forEach(async (d) => {
-      const setRes = await this.esService.esIndex(d.idx, d.id, d.data)
+      const setRes = await this.esService.esSet(d.idx, d.id, d.data)
       res.push(setRes)
     })
 
@@ -35,6 +36,7 @@ export class AppService {
   }
 
   public async getData(idx: string, id: string): Promise<ApiResponse<Record<string, any>, Record<string, unknown>>> {
-    return await this.esService.esGet(idx, id)
+    const esRes = await this.esService.esGet(idx, id)
+    return esRes.body?._source
   }
 }
