@@ -1,4 +1,5 @@
-@REM npm run format
+@SET tmp=
+FOR /F %%I IN ('npm run format') DO @SET "tmp=%%I"
 git fetch --all
 git pull --all
 git add .
