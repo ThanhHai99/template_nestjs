@@ -1,5 +1,4 @@
-@SET tmp=
-FOR /F %%I IN ('npm run format') DO @SET "tmp=%%I"
+start cmd /k "npm run format"
 git fetch --all
 git pull --all
 git add .
