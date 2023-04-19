@@ -1,5 +1,4 @@
-cmd \c "npm run format"
-cmd \c exit
+@REM npm run format
 git fetch --all
 git pull --all
 git add .
