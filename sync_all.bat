@@ -1,4 +1,4 @@
-start cmd /k "npm run format && exit"
+start cmd /k "npm run format && exit && timeout 10"
 pause
 git fetch --all
 git pull --all
