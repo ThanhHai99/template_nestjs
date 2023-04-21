@@ -120,7 +120,7 @@ export class RedisService {
   async isExists(key: string) {
     try {
       const cachingPower = this.configService.get('redis.power')
-      if (cachingPower == CachingEnum.OFF || !this.connected) return null
+      if (cachingPower == CachingEnum.OFF || !this.connected()) return null
 
       const exists = await this.redis.exists(key)
       return exists
