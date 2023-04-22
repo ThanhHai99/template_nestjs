@@ -10,10 +10,3 @@ export class CreateUserDto {
 }
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {}
-import { ObjectType, Field, Int } from '@nestjs/graphql'
-
-@ObjectType()
-export class UserDto {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number
-}

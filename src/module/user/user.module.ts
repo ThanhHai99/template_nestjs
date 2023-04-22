@@ -9,9 +9,5 @@ import { TypeOrmModule } from '@nestjs/typeorm'
   controllers: [UserController],
   providers: [UserService],
   exports: [TypeOrmModule, UserService],
-import { UserResolver } from './user.resolver'
-
-@Module({
-  providers: [UserResolver, UserService],
 })
 export class UserModule {}

@@ -2,7 +2,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type Order {
   """
   Example field (placeholder)
   """
@@ -10,23 +10,23 @@ type User {
 }
 
 type Query {
-  user(id: Int!): User!
+  order(id: Int!): Order!
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  removeOrder(id: Int!): Order!
 }
 
-input CreateUserInput {
+input CreateOrderInput {
   """
   Example field (placeholder)
   """
   exampleField: Int!
 }
 
-input UpdateUserInput {
+input UpdateOrderInput {
   """
   Example field (placeholder)
   """
