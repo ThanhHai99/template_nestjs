@@ -1,7 +1,22 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 @ObjectType()
-export class Order {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number
+@Entity({ name: 'order' })
+export class Order extends BaseEntity {
+  @Field(() => String, { description: 'Example field (placeholder)' })
+  @PrimaryGeneratedColumn('uuid')
+  id: string
+
+  @Field(() => String, { description: 'Example field (placeholder)' })
+  @Column()
+  name: string
+
+  @Field(() => Date, { description: 'Example field (placeholder)' })
+  @CreateDateColumn({ type: 'timestamp without time zone' })
+  created_at: Date
+
+  @Field(() => Date, { description: 'Example field (placeholder)' })
+  @UpdateDateColumn({ type: 'timestamp without time zone' })
+  updated_at: Date
 }

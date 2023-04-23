@@ -1,25 +1,78 @@
 import { Injectable } from '@nestjs/common'
 import { CreateOrderInput, UpdateOrderInput } from './order.input'
+import { OrderResDTO, OrderResDTOs } from './order.dto'
+import { Order } from './order.entity'
+import { Repository } from 'typeorm'
+import { InjectRepository } from '@nestjs/typeorm'
+import { ReponseCode } from 'src/shared/dto/reponse.dto'
 
 @Injectable()
 export class OrderService {
-  create(createOrderInput: CreateOrderInput) {
-    return 'This action adds a new order'
+  constructor(@InjectRepository(Order) private readonly repo: Repository<Order>) {}
+
+  async create(body: CreateOrderInput) {
+    return await this.repo.save(body)
   }
 
-  findAll() {
-    return `This action returns all order`
+  async findAll(): Promise<OrderResDTOs> {
+    const thisOrders = await this.repo.find()
+
+    const finalRes: OrderResDTOs = {
+      code: ReponseCode.SUCCESS,
+      message: {
+        vi: 'Thành công',
+        en: 'Successfully',
+      },
+      data: thisOrders,
+    }
+
+    return finalRes
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`
+  async findOne(id: string): Promise<OrderResDTO> {
+    const thisOrder = await this.repo.findOne({
+      where: {
+        id: id,
+      },
+    })
+
+    const finalRes: OrderResDTO = {
+      code: ReponseCode.SUCCESS,
+      message: {
+        vi: 'Thành công',
+        en: 'Successfully',
+      },
+      data: thisOrder,
+    }
+
+    return finalRes
   }
 
-  update(id: number, updateOrderInput: UpdateOrderInput) {
-    return `This action updates a #${id} order`
+  async update(updateOrderInput: UpdateOrderInput) {
+    const thisOrder = await this.repo.save(updateOrderInput)
+
+    const finalRes: OrderResDTO = {
+      code: ReponseCode.SUCCESS,
+      message: {
+        vi: 'Thành công',
+        en: 'Successfully',
+      },
+      data: thisOrder,
+    }
+
+    return finalRes
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} order`
+  async delete(id: string): Promise<OrderResDTO> {
+    await this.repo.delete(id)
+    const finalRes: OrderResDTO = {
+      code: ReponseCode.SUCCESS,
+      message: {
+        vi: 'Thành công',
+        en: 'Successfully',
+      },
+    }
+
+    return finalRes
   }
 }

@@ -6,30 +6,97 @@ type Order {
   """
   Example field (placeholder)
   """
-  exampleField: Int!
+  id: String!
+
+  """
+  Example field (placeholder)
+  """
+  name: String!
+
+  """
+  Example field (placeholder)
+  """
+  created_at: DateTime!
+
+  """
+  Example field (placeholder)
+  """
+  updated_at: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type ResponseMessage {
+  """
+  Example field (placeholder)
+  """
+  vi: String!
+
+  """
+  Example field (placeholder)
+  """
+  en: String!
+}
+
+type OrderResDTOs {
+  """
+  Example field (placeholder)
+  """
+  code: String!
+
+  """
+  Example field (placeholder)
+  """
+  message: ResponseMessage!
+
+  """
+  Example field (placeholder)
+  """
+  data: [Order!]!
+}
+
+type OrderResDTO {
+  """
+  Example field (placeholder)
+  """
+  code: String!
+
+  """
+  Example field (placeholder)
+  """
+  message: ResponseMessage!
+
+  """
+  Example field (placeholder)
+  """
+  data: Order!
 }
 
 type Query {
-  order(id: Int!): Order!
+  getOrders: OrderResDTOs!
+  getOrder(id: String!): OrderResDTO!
 }
 
 type Mutation {
-  createOrder(createOrderInput: CreateOrderInput!): Order!
-  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
-  removeOrder(id: Int!): Order!
+  createOrder(body: CreateOrderInput!): Order!
+  updateOrder(body: UpdateOrderInput!): OrderResDTO!
+  deleteOrder(id: String!): OrderResDTO!
 }
 
 input CreateOrderInput {
   """
   Example field (placeholder)
   """
-  exampleField: Int!
+  name: String!
 }
 
 input UpdateOrderInput {
   """
   Example field (placeholder)
   """
-  exampleField: Int
-  id: Int!
+  name: String
+  id: String!
 }
