@@ -54,7 +54,7 @@ ${\color{green}\textbf{Done}}$ &emsp;
 | mongoose       | ${\color{green}\textbf{Done}}$       | Mongoose, MongoDB                                                       |
 | grpc           | ${\color{green}\textbf{Done}}$       |                                                                         |
 | firebase       | ${\color{red}\textbf{Open}}$         |                                                                         |
-| graphql        | ${\color{orange}\textbf{InProress}}$ | GraphQL                                                                 |
+| graphql        | ${\color{green}\textbf{Done}}$       | GraphQL                                                                 |
 | interceptor    | ${\color{green}\textbf{Done}}$       | Interceptor                                                             |
 | image          | ${\color{green}\textbf{Done}}$       | Upload, Download                                                        |
 | video          | ${\color{green}\textbf{Done}}$       | Upload, Download, (Streaming)                                           |
@@ -67,6 +67,7 @@ ${\color{green}\textbf{Done}}$ &emsp;
 | factory_method | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Factory Method Pattern                                 |
 | singleton      | ${\color{green}\textbf{Done}}$       | [Design-Pattern] Singleton Pattern                                      |
 | prototype      | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Prototype Pattern                                      |
+| encode         | ${\color{orange}\textbf{InProress}}$ | Server: Encode api, Client: Decode api                                  |
 
 ## Version
 
