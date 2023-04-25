@@ -67,7 +67,7 @@ ${\color{green}\textbf{Done}}$ &emsp;
 | factory_method | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Factory Method Pattern                                 |
 | singleton      | ${\color{green}\textbf{Done}}$       | [Design-Pattern] Singleton Pattern                                      |
 | prototype      | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Prototype Pattern                                      |
-| encode         | ${\color{orange}\textbf{InProress}}$ | Server: Encode api, Client: Decode api                                  |
+| encode         | ${\color{green}\textbf{Done}}$       | Server: Encode api, Client: Decode api ; Hashing data request           |
 
 ## Version
 
