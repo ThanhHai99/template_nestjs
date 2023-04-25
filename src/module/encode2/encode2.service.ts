@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import crypto from 'crypto'
+import { Encode2Dto } from './encode2.dto'
+const crypto = require('crypto')
 
 @Injectable()
 export class Encode2Service {
@@ -36,7 +37,7 @@ export class Encode2Service {
    * @return {string} signature hash
    */
 
-  public generateSignature(appSecret: string, apiEndPoint: string, paramsObj: Object): string {
+  public generateSignature(appSecret: string, apiEndPoint: string, paramsObj: Encode2Dto): string {
     // 1. Sort all request parameters (except the “sign” and parameters with byte array type)
     const keysortParams = this.keysort(paramsObj)
 
