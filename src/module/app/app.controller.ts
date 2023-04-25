@@ -10,6 +10,11 @@ export class AppController {
     return this.appService.getEncode()
   }
 
+  @Get('encode2')
+  async getEncode2(): Promise<Object> {
+    return await this.appService.getEncode2()
+  }
+
   @Get('decode')
   getDecode(@Query('data') data: string): string {
     return this.appService.getDecode(data)
