@@ -717,7 +717,7 @@
     "webpack" "5.80.0"
     "webpack-node-externals" "3.0.0"
 
-"@nestjs/common@^7.0.0 || ^8.0.0 || ^9.0.0", "@nestjs/common@^9.0.0":
+"@nestjs/common@^7.0.0 || ^8.0.0 || ^9.0.0", "@nestjs/common@^7.0.8 || ^8.0.0 || ^9.0.0", "@nestjs/common@^9.0.0":
   "integrity" "sha512-RUcVAQsEF4WPrmzFXEOUfZnPwrLTe1UVlzXTlSyfqfqbdWDPKDGlIPVelBLfc5/+RRUQ0I5iE4+CQvpCmkqldw=="
   "resolved" "https://registry.npmjs.org/@nestjs/common/-/common-9.4.0.tgz"
   "version" "9.4.0"
@@ -747,6 +747,11 @@
     "path-to-regexp" "3.2.0"
     "tslib" "2.5.0"
     "uid" "2.0.2"
+
+"@nestjs/mapped-types@*":
+  "integrity" "sha512-3dHxLXs3M0GPiriAcCFFJQHoDFUuzTD5w6JDhE7TyfT89YKpe6tcCCIqOZWdXmt9AZjjK30RkHRSFF+QEnWFQg=="
+  "resolved" "https://registry.npmjs.org/@nestjs/mapped-types/-/mapped-types-1.2.2.tgz"
+  "version" "1.2.2"
 
 "@nestjs/platform-express@^9.0.0":
   "integrity" "sha512-PpnfghpNq7mwG43z3+pacHulsabUCBMla4nUikntXT525ORpZSDvh/nLi1HLfE4w5+FcINc8/RBOyYTeRVmiRQ=="

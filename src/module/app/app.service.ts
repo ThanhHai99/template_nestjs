@@ -7,13 +7,13 @@ import { Decode2Dto, Encode2Dto } from '../encode2/encode2.dto'
 export class AppService {
   constructor(private readonly encodeService: EncodeService, private readonly encode2Service: Encode2Service) {}
 
-  getEncode(): string {
+  encodeResponse(): string {
     const finalResData = 'Hello World!'
     const finalRes = this.encodeService.encode(finalResData)
     return finalRes
   }
 
-  async getEncode2(thisUrl: string): Promise<Object> {
+  encodeRequest(thisUrl: string): Object {
     let params: Encode2Dto = {
       app_key: 'AppKey',
       timestamp: Date.now().toString(),
@@ -25,12 +25,12 @@ export class AppService {
     return params
   }
 
-  getDecode(data: string): string {
+  decodeResponse(data: string): string {
     const finalRes = this.encodeService.decode(data)
     return finalRes
   }
 
-  async postDecode2(thisUrl: string, data: Decode2Dto): Promise<boolean> {
+  decodeRequest(thisUrl: string, data: Decode2Dto): boolean {
     const thisSignature = data.sign
     delete data.sign
     const signature = this.encode2Service.generateSignature('AppSecretKey', '/thisUrl', data)

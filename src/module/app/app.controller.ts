@@ -1,30 +1,50 @@
 import { Body, Controller, Get, Query, Post, Req } from '@nestjs/common'
 import { AppService } from './app.service'
-import { Decode2Dto, Encode2Dto } from '../encode2/encode2.dto'
+import { Decode2Dto } from '../encode2/encode2.dto'
 import { Request } from 'express'
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('encode')
-  getEncode(): string {
-    return this.appService.getEncode()
-  }
-
-  @Get('encode2')
-  async getEncode2(@Req() req: Request): Promise<Object> {
+  /**
+   * For Client
+   * @param req
+   * @returns
+   */
+  @Get('encode-request')
+  encodeRequest(@Req() req: Request): Object {
     const thisUrl = req.url
-    return await this.appService.getEncode2(thisUrl)
+    return this.appService.encodeRequest(thisUrl)
   }
 
-  @Get('decode')
-  getDecode(@Query('data') data: string): string {
-    return this.appService.getDecode(data)
+  /**
+   * For Server
+   * @param req
+   * @param body
+   * @returns
+   */
+  @Post('decode-request')
+  decodeRequest(@Req() req: Request, @Body() body: Decode2Dto): boolean {
+    return this.appService.decodeRequest(req.url, body)
   }
 
-  @Post('decode2')
-  async postDecode2(@Req() req: Request, @Body() body: Decode2Dto): Promise<boolean> {
-    return await this.appService.postDecode2(req.url, body)
+  /**
+   * For Server
+   * @returns
+   */
+  @Get('encode-response')
+  encodeResponse(): string {
+    return this.appService.encodeResponse()
+  }
+
+  /**
+   * For Client
+   * @param data
+   * @returns
+   */
+  @Get('decode-response')
+  decodeResponse(@Query('data') data: string): string {
+    return this.appService.decodeResponse(data)
   }
 }
