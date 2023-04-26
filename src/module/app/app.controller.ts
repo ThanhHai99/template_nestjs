@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Query, Post, Req } from '@nestjs/common'
+import { Body, Controller, Get, Query, Post, Req, UseInterceptors } from '@nestjs/common'
 import { AppService } from './app.service'
 import { Decode2Dto } from '../encode2/encode2.dto'
 import { Request } from 'express'
+import { AppInterceptor } from './app.interceptor'
 
 @Controller()
+@UseInterceptors(new AppInterceptor())
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
