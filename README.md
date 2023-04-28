@@ -56,8 +56,8 @@ ${\color{green}\textbf{Done}}$ &emsp;
 | firebase           | ${\color{red}\textbf{Open}}$         |                                                                         |
 | graphql            | ${\color{green}\textbf{Done}}$       | GraphQL                                                                 |
 | interceptor        | ${\color{green}\textbf{Done}}$       | Interceptor                                                             |
-| image              | ${\color{green}\textbf{Done}}$       | Upload, Download                                                        |
-| video              | ${\color{green}\textbf{Done}}$       | Upload, Download, (Streaming)                                           |
+| file.image         | ${\color{green}\textbf{Done}}$       | Upload, Download                                                        |
+| file.video         | ${\color{green}\textbf{Done}}$       | Upload, Download, (Streaming)                                           |
 | clean              | ${\color{red}\textbf{Open}}$         | Clean architecture                                                      |
 | solid              | ${\color{red}\textbf{Open}}$         |                                                                         |
 | observer           | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Observer Pattern                                       |
