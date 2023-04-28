@@ -18,12 +18,8 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@libs/rabbitmq": [
-        "libs/rabbitmq/src"
-      ],
-      "@libs/rabbitmq/*": [
-        "libs/rabbitmq/src/*"
-      ]
+      "@libs/rabbitmq": ["libs/rabbitmq/src"],
+      "@libs/rabbitmq/*": ["libs/rabbitmq/src/*"]
     }
   }
 }
