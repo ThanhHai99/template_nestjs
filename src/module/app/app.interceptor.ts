@@ -64,18 +64,10 @@ export class AppInterceptor implements NestInterceptor {
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const req: Request = context.switchToHttp().getRequest()
-    // const res: Response = context.switchToHttp().getResponse()
-    // validate
     const thisQuery = req.query
-    // let params: RequestDto = {
-    //   app_key: 'AppKey',
-    //   timestamp: Date.now().toString(),
-    //   sign_method: 'sha256',
-    //   sign: null,
-    // }
     const thisQueryDto = thisQuery as unknown as RequestDto
     validate(thisQueryDto).then((e0) => {
-      if (e0.length > 0) return e0
+      if (e0.length > 0) throw new HttpException(e0, HttpStatus.BAD_REQUEST)
     })
     delete thisQueryDto.sign
     const signTruth = this.generateSignature(req.query.app_key as string, req.url.split('?')[0], thisQueryDto)
@@ -83,10 +75,6 @@ export class AppInterceptor implements NestInterceptor {
     if (thisQueryDto.sign !== signTruth) {
       throw new HttpException('loi cmnr', HttpStatus.BAD_REQUEST)
     }
-
     return next.handle()
-    // const now = Date.now()
-    // // return next.handle().pipes(tap(() => console.log(`After... ${Date.now() - now}ms`)))
-    // return next.handle().pipe(tap(() => console.log(`After ... ${Date.now() - now} ms`)))
   }
 }
