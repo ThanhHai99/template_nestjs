@@ -9,6 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"./\"",
     "start": "npm run format && nest start",
+    "start:client": "node dist/client",
     "start:dev": "npm run format && nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -20,11 +21,13 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/class-validator": "^0.13.4",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
+    "axios": "^1.4.0",
     "crypto": "^1.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
