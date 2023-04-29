@@ -47,7 +47,7 @@ ${\color{green}\textbf{Done}}$ &emsp;
 | queuing.rabbitmq   | ${\color{green}\textbf{Done}}$       | RabbitMQ, (kafka)                                                       |
 | mail               | ${\color{green}\textbf{Done}}$       | Send mail                                                               |
 | rbac               | ${\color{green}\textbf{Done}}$       | Authentication, Authorization, Permission                               |
-| oauth              | ${\color{red}\textbf{Open}}$         |                                                                         |
+| oauth              | ${\color{orange}\textbf{InProress}}$ | Oauth2                                                                  |
 | cicd               | ${\color{green}\textbf{Done}}$       | CI/CD                                                                   |
 | nx                 | ${\color{green}\textbf{Done}}$       | NX Workspace                                                            |
 | elasticsearch      | ${\color{green}\textbf{Done}}$       | Elasticsearch                                                           |
