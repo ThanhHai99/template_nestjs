@@ -60,13 +60,13 @@ ${\color{green}\textbf{Done}}$ &emsp;
 | file.video         | ${\color{green}\textbf{Done}}$       | Upload, Download, (Streaming)                                           |
 | clean              | ${\color{red}\textbf{Open}}$         | Clean architecture                                                      |
 | solid              | ${\color{red}\textbf{Open}}$         |                                                                         |
-| observer           | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Observer Pattern                                       |
-| facade             | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Facede Pattern                                         |
-| proxy              | ${\color{orange}\textbf{InProress}}$ | [Design-Pattern] Proxy Pattern                                          |
-| simple_factory     | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Simple Factory Pattern                                 |
-| factory_method     | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Factory Method Pattern                                 |
-| singleton          | ${\color{green}\textbf{Done}}$       | [Design-Pattern] Singleton Pattern                                      |
-| prototype          | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Prototype Pattern                                      |
+| dp.observer        | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Observer Pattern                                       |
+| dp.facade          | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Facede Pattern                                         |
+| dp.proxy           | ${\color{orange}\textbf{InProress}}$ | [Design-Pattern] Proxy Pattern                                          |
+| dp.simple_factory  | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Simple Factory Pattern                                 |
+| dp.factory_method  | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Factory Method Pattern                                 |
+| dp.singleton       | ${\color{green}\textbf{Done}}$       | [Design-Pattern] Singleton Pattern                                      |
+| dp.prototype       | ${\color{red}\textbf{Open}}$         | [Design-Pattern] Prototype Pattern                                      |
 | security.request   | ${\color{green}\textbf{Done}}$       | Encode request, Decode request                                          |
 | security.response  | ${\color{green}\textbf{Done}}$       | Encode response, Decode response                                        |
 
