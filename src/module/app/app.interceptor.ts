@@ -7,8 +7,6 @@ import { validate } from '@nestjs/class-validator'
 
 @Injectable()
 export class AppInterceptor implements NestInterceptor {
-  constructor() {}
-
   /**
    * Shallow copy an object with sorted keys
    * @param {Object} unorderedObj
@@ -69,10 +67,11 @@ export class AppInterceptor implements NestInterceptor {
     validate(thisQueryDto).then((e0) => {
       if (e0.length > 0) throw new HttpException(e0, HttpStatus.BAD_REQUEST)
     })
+    const signReq = thisQueryDto.sign
     delete thisQueryDto.sign
-    const signTruth = this.generateSignature(req.query.app_key as string, req.url.split('?')[0], thisQueryDto)
+    const signTruth = this.generateSignature('AppSecret', req.url.split('?')[0], thisQueryDto)
 
-    if (thisQueryDto.sign !== signTruth) {
+    if (signReq !== signTruth) {
       throw new HttpException('loi cmnr', HttpStatus.BAD_REQUEST)
     }
     return next.handle()

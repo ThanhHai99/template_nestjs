@@ -11,15 +11,4 @@ export class AppController {
   getHello(): boolean {
     return this.appService.getHello()
   }
-
-  // /**
-  //  * For Server
-  //  * @param req
-  //  * @param body
-  //  * @returns
-  //  */
-  // @Post('decode-request')
-  // decodeRequest(@Req() req: Request, @Body() body: Decode2Dto): boolean {
-  //   return this.appService.decodeRequest(req.url, body)
-  // }
 }
