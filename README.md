@@ -56,6 +56,7 @@ ${\color{green}\textbf{Done}}$ &emsp;
 | grpc               | ${\color{green}\textbf{Done}}$       | gRPC                                                                  |
 | firebase           | ${\color{red}\textbf{Open}}$         | Firebase                                                              |
 | graphql            | ${\color{green}\textbf{Done}}$       | GraphQL                                                               |
+| capcha             | ${\color{red}\textbf{Open}}$         | Capcha                                                                |
 | interceptor        | ${\color{green}\textbf{Done}}$       | Interceptor                                                           |
 | file.image         | ${\color{green}\textbf{Done}}$       | Upload, Download                                                      |
 | file.video         | ${\color{green}\textbf{Done}}$       | Upload, Download, (Streaming)                                         |
