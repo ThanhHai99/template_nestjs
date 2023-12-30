@@ -1,5 +1,9 @@
+<h1 style="color:skyblue;">Template</h1>
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank">
+  <img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" />
+  </a>
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
@@ -24,24 +28,48 @@
 
 ## Feature branch
 
-- master : Origin, logger, config, dockerfile, docker-compose
-- master -> cqrs : cqrs
-- master -> configs :
-- master -> microservice : pubsub, nats, microservice
-- master -> typeorm : TypeORM, PostgreSQL
-- master -> prisma :
-- master -> caching : redis
-- master -> queuing : rabbitmq, (kafka)
-- master -> mail : send mail
-- master -> rbac : authentication, authorization, permission
-- master -> oauth :
-- master -> cicd : cicd
-- masrer -> nx : nx workspace
-- master -> elasticsearch :
-- master -> mongoose :
-- master -> grpc :
-- master -> firebase :
-- master -> graphQL:
+${\color{darkgrey}\textbf{Note}}$ &#58; &emsp;
+${\color{red}\textbf{Open}}$ &emsp;
+${\color{orange}\textbf{InProress}}$ &emsp;
+${\color{green}\textbf{Done}}$ &emsp;
+
+| Branch             | Status                               | Detail                                                                |
+| ------------------ | ------------------------------------ | --------------------------------------------------------------------- |
+| master             | ${\color{green}\textbf{Done}}$       | Origin, Logger, Config, Dockerfile, docker-compose, Precommit, Format |
+| session            | ${\color{red}\textbf{Open}}$         | Session                                                               |
+| cookie             | ${\color{red}\textbf{Open}}$         | Cookie                                                                |
+| cqrs               | ${\color{green}\textbf{Done}}$       | CQRS                                                                  |
+| configs            | ${\color{green}\textbf{Done}}$       | Configs                                                               |
+| microservice       | ${\color{green}\textbf{Done}}$       | PubSub, NATs, Microservice                                            |
+| typeorm.postgresql | ${\color{green}\textbf{Done}}$       | TypeORM, PostgreSQL                                                   |
+| prisma.postgresql  | ${\color{green}\textbf{Done}}$       | Prisma                                                                |
+| caching.redis      | ${\color{green}\textbf{Done}}$       | Redis                                                                 |
+| caching.memcached  | ${\color{red}\textbf{Open}}$         | Memcached                                                             |
+| queuing.rabbitmq   | ${\color{green}\textbf{Done}}$       | RabbitMQ, (kafka)                                                     |
+| mail               | ${\color{green}\textbf{Done}}$       | Send mail                                                             |
+| rbac               | ${\color{green}\textbf{Done}}$       | Authentication, Authorization, Permission                             |
+| oauth              | ${\color{orange}\textbf{InProress}}$ | Oauth2                                                                |
+| cicd               | ${\color{green}\textbf{Done}}$       | CI/CD                                                                 |
+| nx                 | ${\color{green}\textbf{Done}}$       | NX Workspace                                                          |
+| elasticsearch      | ${\color{green}\textbf{Done}}$       | Elasticsearch                                                         |
+| mongoose           | ${\color{green}\textbf{Done}}$       | Mongoose, MongoDB                                                     |
+| grpc               | ${\color{green}\textbf{Done}}$       | gRPC                                                                  |
+| firebase           | ${\color{red}\textbf{Open}}$         | Firebase                                                              |
+| graphql            | ${\color{green}\textbf{Done}}$       | GraphQL                                                               |
+| interceptor        | ${\color{green}\textbf{Done}}$       | Interceptor                                                           |
+| file.image         | ${\color{green}\textbf{Done}}$       | Upload, Download                                                      |
+| file.video         | ${\color{green}\textbf{Done}}$       | Upload, Download, (Streaming)                                         |
+| clean              | ${\color{red}\textbf{Open}}$         | Clean architecture                                                    |
+| solid              | ${\color{red}\textbf{Open}}$         | Solid                                                                 |
+| dp.observer        | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Observer Pattern                                     |
+| dp.facade          | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Facede Pattern                                       |
+| dp.proxy           | ${\color{orange}\textbf{InProress}}$ | (Design-Pattern) Proxy Pattern                                        |
+| dp.simple_factory  | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Simple Factory Pattern                               |
+| dp.factory_method  | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Factory Method Pattern                               |
+| dp.singleton       | ${\color{green}\textbf{Done}}$       | (Design-Pattern) Singleton Pattern                                    |
+| dp.prototype       | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Prototype Pattern                                    |
+| security.request   | ${\color{green}\textbf{Done}}$       | Encode request, Decode request                                        |
+| security.response  | ${\color{green}\textbf{Done}}$       | Encode response, Decode response                                      |
 
 ## Version
 
