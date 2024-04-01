@@ -34,10 +34,11 @@ ${\color{orange}\textbf{InProress}}$ &emsp;
 ${\color{green}\textbf{Done}}$ &emsp;
 
 | Branch             | Status                               | Detail                                                                |
-| ------------------ | ------------------------------------ | --------------------------------------------------------------------- |
+| ------------------ |--------------------------------------| --------------------------------------------------------------------- |
 | master             | ${\color{green}\textbf{Done}}$       | Origin, Logger, Config, Dockerfile, docker-compose, Precommit, Format |
 | session            | ${\color{red}\textbf{Open}}$         | Session                                                               |
 | cookie             | ${\color{red}\textbf{Open}}$         | Cookie                                                                |
+| telemetry          | ${\color{red}\textbf{Open}}$         | Telemetry                                                             |
 | cqrs               | ${\color{green}\textbf{Done}}$       | CQRS                                                                  |
 | configs            | ${\color{green}\textbf{Done}}$       | Configs                                                               |
 | microservice       | ${\color{green}\textbf{Done}}$       | PubSub, NATs, Microservice                                            |
