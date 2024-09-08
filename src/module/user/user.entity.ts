@@ -9,11 +9,20 @@ export class User extends BaseEntity {
   username: string
 
   @Column()
+  email: string
+
+  @Column({ type: 'enum', enum: ['male', 'female'] })
+  sex: string
+
+  @Column()
   password: string
 
-  @CreateDateColumn({ type: 'timestamp without time zone' })
+  @Column()
+  status: boolean
+
+  @CreateDateColumn()
   created_at: Date
 
-  @UpdateDateColumn({ type: 'timestamp without time zone' })
+  @UpdateDateColumn()
   updated_at: Date
 }

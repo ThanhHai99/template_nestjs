@@ -16,18 +16,18 @@ import configuration from '../../config/configuration'
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         //here, use of process.env.DATABASE_TYPE is impossible with nestjs and also deprecated, the type of db must be known beforehand
-        type: 'postgres',
+        type: 'mysql',
         host: configService.get<string>('database.host'),
         port: configService.get<number>('database.port'),
         username: configService.get<string>('database.user'),
         password: configService.get<string>('database.pass'),
         database: configService.get<string>('database.name'),
         //WARNING: Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
-        synchronize: true,
+        synchronize: false,
         autoLoadEntities: true,
         charset: 'utf8mb4',
         collation: 'utf8mb4_unicode_ci',
-        logging: ['error'],
+        logging: false,
       }),
     }),
   ],

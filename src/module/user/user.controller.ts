@@ -12,6 +12,11 @@ export class UserController {
     return this.userService.create(createUserDto)
   }
 
+  @Post('seed')
+  seed() {
+    return this.userService.seed()
+  }
+
   @Get()
   async findAll(): Promise<Array<User>> {
     return await this.userService.findAll()
