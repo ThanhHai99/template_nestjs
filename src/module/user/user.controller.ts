@@ -12,7 +12,7 @@ export class UserController {
     return this.userService.create(createUserDto)
   }
 
-  @Post('seed')
+  @Get('seed')
   seed() {
     return this.userService.seed()
   }
