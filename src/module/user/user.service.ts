@@ -42,8 +42,9 @@ export class UserService {
   }
 
   async seed() {
-    const batchSize = 1000 // Define batch size
+    const batchSize = 100 // Define batch size
     const total = 10000000 // 10 million rows
+    let addedTotal = 0
     for (let i = 0; i < total; i += batchSize) {
       const users = []
       for (let j = 0; j < batchSize; j++) {
@@ -52,8 +53,9 @@ export class UserService {
       }
 
       // Batch insert
-      await this.userRepository.save(users)
-      console.log(`Inserted batch: ${i / batchSize + 1}`)
+      this.userRepository.save(users)
+      addedTotal += batchSize
+      console.log(`Inserted batch: ${addedTotal}`)
     }
 
     console.log('Seeding completed.')
