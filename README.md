@@ -62,6 +62,7 @@ ${\color{green}\textbf{Done}}$ &emsp;
 | file.video         | ${\color{green}\textbf{Done}}$       | Upload, Download, (Streaming)                                         |
 | clean              | ${\color{red}\textbf{Open}}$         | Clean architecture                                                    |
 | solid              | ${\color{red}\textbf{Open}}$         | Solid                                                                 |
+| ftp                | ${\color{red}\textbf{Done}}$         | Ftp                                                                   |
 | dp.observer        | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Observer Pattern                                     |
 | dp.facade          | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Facede Pattern                                       |
 | dp.proxy           | ${\color{orange}\textbf{InProress}}$ | (Design-Pattern) Proxy Pattern                                        |
