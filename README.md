@@ -63,6 +63,7 @@ ${\color{green}\textbf{Done}}$ &emsp;
 | clean              | ${\color{red}\textbf{Open}}$         | Clean architecture                                                    |
 | solid              | ${\color{red}\textbf{Open}}$         | Solid                                                                 |
 | ftp                | ${\color{red}\textbf{Done}}$         | Ftp                                                                   |
+| amazone s3         | ${\color{red}\textbf{Open}}$         | Amazone S3                                                            |
 | dp.observer        | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Observer Pattern                                     |
 | dp.facade          | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Facede Pattern                                       |
 | dp.proxy           | ${\color{orange}\textbf{InProress}}$ | (Design-Pattern) Proxy Pattern                                        |
