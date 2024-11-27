@@ -1,45 +1,63 @@
-import { Injectable } from '@nestjs/common'
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
-import { ConfigService } from '@nestjs/config'
-import * as fs from 'fs'
+import { Injectable, Logger } from '@nestjs/common'
+import * as Minio from 'minio'
+
 
 @Injectable()
 export class S3Service {
-  private s3Client: S3Client
-  private bucketName: string
+  // example (Nutricare)(production)
+  private readonly minioClient: Minio.Client
+  private readonly accessKey = ''
+  private readonly secretKey = ''
+  private readonly endPoint = ''
+  private readonly bucket = ''
+  private readonly logger = new Logger(S3Service.name)
 
-  constructor(private readonly configService: ConfigService) {
-    this.s3Client = new S3Client({
-      region: this.configService.get<string>('AWS_REGION'),
-      credentials: {
-        accessKeyId: this.configService.get<string>('AWS_ACCESS_KEY_ID'),
-        secretAccessKey: this.configService.get<string>('AWS_SECRET_ACCESS_KEY'),
-      },
+  constructor() {
+    this.minioClient = new Minio.Client({
+      endPoint: this.endPoint,
+      accessKey: this.accessKey,
+      secretKey: this.secretKey,
+      useSSL: false,
     })
-    this.bucketName = this.configService.get<string>('AWS_S3_BUCKET_NAME')
   }
 
-  /**
-   * Upload file từ local lên S3 bucket
-   * @param localFilePath Đường dẫn file trên local
-   * @param s3Key Đường dẫn file trên S3 (VD: folder/filename.ext)
-   */
-  async uploadFile(localFilePath: string, s3Key: string): Promise<string> {
+  public async isExistsFilePath(bucket: string, path: string) {
     try {
-      const fileStream = fs.createReadStream(localFilePath)
-      const command = new PutObjectCommand({
-        Bucket: this.bucketName,
-        Key: s3Key,
-        Body: fileStream,
+      return this.minioClient.statObject(bucket, path).then(data => true).catch(() => false)
+    } catch (error) {
+      this.logger.error(error)
+    }
+  }
+
+  public async upload(
+    bucketName: string,
+    relativePathFileDestination: string, // Ex: /uploads/daily/2024/11/17/DS_DangKyCTTB/DS_DangKyCTTB_2024-11-17.xlsx
+    relativePathFileSource: string,
+  ) {
+    try {
+      // Liệt kê các tệp trong bucket
+      const stream = this.minioClient.listObjectsV2(bucketName, '', true)
+      stream.on('data', (obj) => {
+        console.log(obj.name)
+      })
+      stream.on('error', (err) => {
+        console.error('Lỗi khi liệt kê tệp:', err)
       })
 
-      await this.s3Client.send(command)
-      console.log(`File uploaded successfully to S3: ${s3Key}`)
 
-      return `https://${this.bucketName}.s3.${this.configService.get<string>('AWS_REGION')}.amazonaws.com/${s3Key}`
+      // const isExistsBucket = await this.minioClient.bucketExists(bucketName);
+      // if (!isExistsBucket) {
+      //   await this.minioClient.makeBucket(bucketName);
+      // }
+      // const isExistsFilePath = await this.isExistsFilePath(bucketName, relativePathFileDestination);
+      // if (isExistsFilePath) {
+      //   return;
+      // } else {
+      //   // return this.minioClient.putObject(bucketName, relativePathFile, streamData); // upload by stream
+      //   return this.minioClient.fPutObject(bucketName, relativePathFileDestination, relativePathFileSource); // upload by file path
+      // }
     } catch (error) {
-      console.error('Error uploading file to S3:', error)
-      throw new Error('File upload failed')
+      this.logger.error(error)
     }
   }
 }
