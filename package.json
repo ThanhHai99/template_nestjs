@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"./\"",
+    "prettier": "prettier --write \"./\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -19,8 +19,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky",
-    "lint-staged": "lint-staged",
-    "pre-commit": "lint-staged"
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -74,7 +73,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "npm run test",
+      "npm run lint",
       "npm run prettier"
     ]
   }
