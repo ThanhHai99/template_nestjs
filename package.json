@@ -19,7 +19,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "pre-commit": "lint-staged"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -72,10 +73,9 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "*.ts": [
-      "npm run lint",
-      "npm run format",
-      "git add ."
+    "src/**/*.{ts,tsx}": [
+      "npm run test",
+      "npm run prettier"
     ]
   }
 }
