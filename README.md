@@ -34,7 +34,7 @@ ${\color{orange}\textbf{InProress}}$ &emsp;
 ${\color{green}\textbf{Done}}$ &emsp;
 
 | Branch             | Status                               | Detail                                                                |
-| ------------------ | ------------------------------------ | --------------------------------------------------------------------- |
+|--------------------| ------------------------------------ |-----------------------------------------------------------------------|
 | master             | ${\color{green}\textbf{Done}}$       | Origin, Logger, Config, Dockerfile, docker-compose, Precommit, Format |
 | session            | ${\color{red}\textbf{Open}}$         | Session                                                               |
 | cookie             | ${\color{red}\textbf{Open}}$         | Cookie                                                                |
@@ -71,6 +71,7 @@ ${\color{green}\textbf{Done}}$ &emsp;
 | dp.factory_method  | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Factory Method Pattern                               |
 | dp.singleton       | ${\color{green}\textbf{Done}}$       | (Design-Pattern) Singleton Pattern                                    |
 | dp.prototype       | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Prototype Pattern                                    |
+| dp.facade          | ${\color{red}\textbf{Open}}$         | (Design-Pattern) Facade Pattern                                       |
 | security.request   | ${\color{green}\textbf{Done}}$       | Encode request, Decode request                                        |
 | security.response  | ${\color{green}\textbf{Done}}$       | Encode response, Decode response                                      |
 
