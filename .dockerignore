@@ -1,2 +1,13 @@
-node_modules
+.dockerignore
+.eslint.js
+.git/
+.github/
+.gitignore
+.prettierc
+docker/
+Dockerfile
+*.md
+node_modules/
 npm-debug.log
+.husky/
+test/
