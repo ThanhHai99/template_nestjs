@@ -23,11 +23,24 @@ import configuration from '../../config/configuration'
         password: configService.get<string>('database.pass'),
         database: configService.get<string>('database.name'),
         //WARNING: Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
-        synchronize: false,
+        synchronize: true,
         autoLoadEntities: true,
         charset: 'utf8mb4',
         collation: 'utf8mb4_unicode_ci',
         logging: false,
+        extra: {
+          connectionLimit: 20,
+          queueLimit: 0,
+          waitForConnections: true,
+          // Add performance optimizations for bulk insert
+          multipleStatements: true,
+          maxBatchSize: 100000,
+        },
+        poolSize: 20,
+        // Add query timeout to prevent long-running queries
+        connectTimeout: 60000,
+        acquireTimeout: 60000,
+        timeout: 60000,
       }),
     }),
   ],
