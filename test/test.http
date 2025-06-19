@@ -1,0 +1,19 @@
+# Định nghĩa trực tiếp port từ file .env
+@port = 80
+@baseUrl = http://localhost:{{port}}
+
+###
+GET {{baseUrl}}/api/item?id=99
+Accept: application/json
+
+###
+POST {{baseUrl}}/api/item
+Content-Type: application/json
+
+{
+  "name": "New Item"
+}
+
+###
+GET {{baseUrl}}/api/item?id=99
+Accept: application/json
