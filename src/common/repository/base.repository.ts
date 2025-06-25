@@ -17,7 +17,44 @@ export class BaseRepository<T> {
   constructor(private readonly repository: Repository<T>) {}
 
   async find(options?: FindManyOptions<T[]>): Promise<T[]> {
-    return await this.repository.createQueryBuilder().select().where(options.where).cache(true).getMany()
+    const qb = this.repository.createQueryBuilder('entity')
+
+    if (options?.where) {
+      const whereConditions = options.where
+
+      // Xử lý khi `where` là mảng OR
+      if (Array.isArray(whereConditions)) {
+        const fullTextConditions = whereConditions.map((condition) => {
+          // Ép kiểu và kiểm tra if LIKE
+          const entries = Object.entries(condition) as [string, { operator?: string; value?: string }][]
+          const likeEntry = entries.find(([_, value]) => value?.operator === 'Like' && typeof value.value === 'string')
+
+          if (likeEntry) {
+            const [field, value] = likeEntry
+            const keyword = value.value.replace(/%/g, '') // Bỏ dấu `%` trong LIKE
+            return `MATCH(${field}) AGAINST('+${keyword}*' IN BOOLEAN MODE)`
+          }
+
+          return condition // Giữ nguyên điều kiện nếu không có LIKE
+        })
+
+        // Thêm vào truy vấn với OR
+        qb.where(fullTextConditions.map((cond) => (typeof cond === 'string' ? cond : JSON.stringify(cond))).join(' OR '))
+      } else {
+        // Xử lý when điều kiện where là một object
+        Object.entries(whereConditions).forEach(([field, value]) => {
+          if ((value as any)?.operator === 'Like' && typeof (value as any).value === 'string') {
+            const keyword = (value as any).value.replace(/%/g, '') // Xử lý keyword từ Like
+            qb.andWhere(`MATCH(${field}) AGAINST(:keyword IN BOOLEAN MODE)`, { keyword: `+${keyword}*` })
+          } else {
+            qb.andWhere(`${field} = :value`, { value })
+          }
+        })
+      }
+    }
+
+    // Cache query
+    return await qb.cache(true).getMany()
   }
 
   async findOne(options: FindOneOptions<T>): Promise<T> {
