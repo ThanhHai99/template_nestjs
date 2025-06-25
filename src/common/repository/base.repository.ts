@@ -21,7 +21,6 @@ export class BaseRepository<T> {
 
     if (options?.where) {
       const whereConditions = options.where
-
       // Xử lý khi `where` là mảng OR
       if (Array.isArray(whereConditions)) {
         const fullTextConditions = whereConditions.map((condition) => {

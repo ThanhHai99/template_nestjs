@@ -2,7 +2,7 @@
 @port = 80
 @baseUrl = http://localhost:{{port}}
 
-### Set global header
+### Get all users
 < {%
   client.global.headers.set('Accept', 'application/json')
   client.global.headers.set('x-special-flag', '3536AEAC-F9C3-48F4-BE9F-10AC92D5949D')
@@ -14,7 +14,7 @@ GET {{baseUrl}}/users?keyword=Olga
   console.log(`Response: ${JSON.stringify(response)}`)
 %}
 
-### Once set, the global header is available in all subsequent requests and scripts.
+### Get one user
 GET {{baseUrl}}/users
 
 > {%
