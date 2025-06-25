@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 @Entity({ name: 'user' })
 export class User extends BaseEntity {
@@ -6,9 +6,11 @@ export class User extends BaseEntity {
   id: string
 
   @Column()
+  @Index({ fulltext: true })
   username: string
 
   @Column()
+  @Index({ fulltext: true })
   email: string
 
   @Column({ type: 'enum', enum: ['male', 'female'] })
