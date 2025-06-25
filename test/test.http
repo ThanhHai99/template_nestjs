@@ -2,18 +2,42 @@
 @port = 80
 @baseUrl = http://localhost:{{port}}
 
-###
-GET {{baseUrl}}/api/item?id=99
-Accept: application/json
+### Set global header
+< {%
+  client.global.headers.set('Accept', 'application/json')
+  client.global.headers.set('x-special-flag', '3536AEAC-F9C3-48F4-BE9F-10AC92D5949D')
+%}
 
-###
-POST {{baseUrl}}/api/item
-Content-Type: application/json
+GET {{baseUrl}}/item
 
-{
-  "name": "New Item"
-}
+> {%
+  console.log(`headers: ${JSON.stringify(request.headers.all())}`)
+%}
 
-###
-GET {{baseUrl}}/api/item?id=99
-Accept: application/json
+### Once set, the global header is available in all subsequent requests and scripts.
+GET {{baseUrl}}/item
+
+> {%
+  console.log(`x-special-flag: ${JSON.stringify(request.headers.findByName('x-special-flag'))}`)
+
+%}
+
+### Process API is emulated (Mac/Linux).
+GET {{baseUrl}}/item
+
+> {%
+  const result = spawnSync('uname', ['-a'])
+  console.log(`result: ${JSON.stringify(result)}`)
+%}
+
+### Process API emulated (Windows only).
+GET {{baseUrl}}/item
+
+> {%
+  const result = spawnSync('cmd', ['/c', 'ver'])
+  console.log(`result: ${JSON.stringify(result)}`)
+%}
+
+### The request will be sent as is, without encoding
+# @no-auto-encoding
+GET {{baseUrl}}/item?value=@+$!
