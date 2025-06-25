@@ -1,4 +1,4 @@
-import { Repository, FindOptionsWhere, DeepPartial, DeleteResult, FindManyOptions, FindOneOptions } from 'typeorm'
+import { DeepPartial, DeleteResult, FindManyOptions, FindOneOptions, FindOptionsWhere, Repository } from 'typeorm'
 
 export interface IPaginationOptions {
   page: number
@@ -16,8 +16,8 @@ export interface IPaginationResult<T> {
 export class BaseRepository<T> {
   constructor(private readonly repository: Repository<T>) {}
 
-  async find(options?: FindManyOptions<T>): Promise<T[]> {
-    return await this.repository.createQueryBuilder().select().cache(true).getMany()
+  async find(options?: FindManyOptions<T[]>): Promise<T[]> {
+    return await this.repository.createQueryBuilder().select().where(options.where).cache(true).getMany()
   }
 
   async findOne(options: FindOneOptions<T>): Promise<T> {

@@ -8,36 +8,15 @@
   client.global.headers.set('x-special-flag', '3536AEAC-F9C3-48F4-BE9F-10AC92D5949D')
 %}
 
-GET {{baseUrl}}/item
+GET {{baseUrl}}/users?keyword=Olga
 
 > {%
-  console.log(`headers: ${JSON.stringify(request.headers.all())}`)
+  console.log(`Response: ${JSON.stringify(response)}`)
 %}
 
 ### Once set, the global header is available in all subsequent requests and scripts.
-GET {{baseUrl}}/item
+GET {{baseUrl}}/users
 
 > {%
-  console.log(`x-special-flag: ${JSON.stringify(request.headers.findByName('x-special-flag'))}`)
-
+  console.log(`Response: ${JSON.stringify(response)}`)
 %}
-
-### Process API is emulated (Mac/Linux).
-GET {{baseUrl}}/item
-
-> {%
-  const result = spawnSync('uname', ['-a'])
-  console.log(`result: ${JSON.stringify(result)}`)
-%}
-
-### Process API emulated (Windows only).
-GET {{baseUrl}}/item
-
-> {%
-  const result = spawnSync('cmd', ['/c', 'ver'])
-  console.log(`result: ${JSON.stringify(result)}`)
-%}
-
-### The request will be sent as is, without encoding
-# @no-auto-encoding
-GET {{baseUrl}}/item?value=@+$!

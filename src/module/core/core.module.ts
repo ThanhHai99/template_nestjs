@@ -27,7 +27,7 @@ import configuration from '../../config/configuration'
         autoLoadEntities: true,
         charset: 'utf8mb4',
         collation: 'utf8mb4_unicode_ci',
-        logging: false,
+        logging: true,
         extra: {
           connectionLimit: 20,
           queueLimit: 0,

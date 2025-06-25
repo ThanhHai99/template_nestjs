@@ -1,9 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common'
 import { UserService } from './user.service'
 import { CreateUserDto, UpdateUserDto } from './user.dto'
 import { User } from './user.entity'
 
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -18,8 +18,8 @@ export class UserController {
   }
 
   @Get()
-  async findAll(): Promise<Array<User>> {
-    return await this.userService.findAll()
+  async findAll(@Query() query: { keyword: string }): Promise<Array<User>> {
+    return await this.userService.findAll(query)
   }
 
   @Get(':id')

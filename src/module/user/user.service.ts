@@ -5,6 +5,7 @@ import { faker } from '@faker-js/faker'
 import * as bcrypt from 'bcryptjs'
 import { BaseRepository } from '../../common/repository/base.repository'
 import { InjectBaseRepository } from '../../common/decorators/inject-base-repository.decorator'
+import { FindOptionsWhere, Like } from 'typeorm'
 
 @Injectable()
 export class UserService {
@@ -14,8 +15,9 @@ export class UserService {
     return await this.userRepository.save(createUserDto)
   }
 
-  async findAll(): Promise<Array<User>> {
-    return await this.userRepository.find()
+  async findAll(query: { keyword: string }): Promise<Array<User>> {
+    const conditions: FindOptionsWhere<Array<User>> = [{ email: Like(`%${query.keyword}%`) }, { username: Like(`%${query.keyword}%`) }]
+    return await this.userRepository.find({ where: conditions })
   }
 
   async findOne(id: string): Promise<User> {
@@ -41,23 +43,6 @@ export class UserService {
     }
   }
 
-  // Optimized version that generates multiple users at once
-  private generateFakeUsers(count: number): Array<CreateUserDto> {
-    // const salt = await bcrypt.genSalt(10)
-    const users: CreateUserDto[] = []
-    for (let i = 0; i < count; i++) {
-      users.push({
-        username: faker.internet.userName(),
-        email: faker.internet.email(),
-        sex: faker.helpers.arrayElement(['male', 'female']),
-        // password: await bcrypt.hash('123456', salt),
-        password: 'Aa@12345',
-        status: faker.helpers.arrayElement([true, false]),
-      })
-    }
-    return users
-  }
-
   async seed() {
     try {
       const total = 10000000
@@ -74,8 +59,8 @@ export class UserService {
         await this.userRepository.transaction(async (entityManager) => {
           const values = batchUsers.map((user) => `(UUID(), '${user.username}', '${user.email}', '${user.sex}', '${user.password}', ${user.status})`).join(',')
           await entityManager.query(`
-            INSERT INTO user (id, username, email, sex, password, status)
-            VALUES ${values}
+              INSERT INTO user (id, username, email, sex, password, status)
+              VALUES ${values}
           `)
         })
 
@@ -114,5 +99,22 @@ export class UserService {
       console.error('Error during seeding:', error)
       throw error
     }
+  }
+
+  // Optimized version that generates multiple users at once
+  private generateFakeUsers(count: number): Array<CreateUserDto> {
+    // const salt = await bcrypt.genSalt(10)
+    const users: CreateUserDto[] = []
+    for (let i = 0; i < count; i++) {
+      users.push({
+        username: faker.internet.userName(),
+        email: faker.internet.email(),
+        sex: faker.helpers.arrayElement(['male', 'female']),
+        // password: await bcrypt.hash('123456', salt),
+        password: 'Aa@12345',
+        status: faker.helpers.arrayElement([true, false]),
+      })
+    }
+    return users
   }
 }
