@@ -38,9 +38,7 @@ import configuration from '../../config/configuration'
         },
         poolSize: 20,
         // Add query timeout to prevent long-running queries
-        connectTimeout: 60000,
-        acquireTimeout: 60000,
-        timeout: 60000,
+        connectTimeout: 60000, // Giữ tùy chọn này thay vì acquireTimeout
       }),
     }),
   ],
