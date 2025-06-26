@@ -45,8 +45,8 @@ export class UserService {
 
   async seed() {
     try {
-      const total = 10000000
-      const batchSize = 100000
+      const total = 1000000
+      const batchSize = 10000
       const concurrentBatches = 8
       let addedTotal = 0
       const startTime = Date.now()
@@ -59,7 +59,7 @@ export class UserService {
         await this.userRepository.transaction(async (entityManager) => {
           const values = batchUsers.map((user) => `(UUID(), '${user.username}', '${user.email}', '${user.sex}', '${user.password}', ${user.status})`).join(',')
           await entityManager.query(`
-              INSERT INTO user (id, username, email, sex, password, status)
+              INSERT INTO user (acc_id, acc_username, acc_email, acc_sex, acc_password, acc_status)
               VALUES ${values}
           `)
         })
