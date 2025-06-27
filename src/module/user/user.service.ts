@@ -46,7 +46,7 @@ export class UserService {
   async seed() {
     try {
       const total = 10000000
-      const batchSize = 100000
+      const batchSize = 1000
       const concurrentBatches = 8
       let addedTotal = 0
       const startTime = Date.now()
