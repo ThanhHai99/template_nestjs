@@ -59,7 +59,7 @@ export class UserService {
         await this.userRepository.transaction(async (entityManager) => {
           const values = batchUsers.map((user) => `(UUID(), '${user.username}', '${user.email}', '${user.sex}', '${user.password}', ${user.status})`).join(',')
           await entityManager.query(`
-              INSERT INTO user (acc_id, acc_username, acc_email, acc_sex, acc_password, acc_status)
+              INSERT INTO user (usr_id, usr_username, usr_email, usr_sex, usr_password, usr_status)
               VALUES ${values}
           `)
         })
