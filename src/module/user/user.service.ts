@@ -6,6 +6,7 @@ import * as bcrypt from 'bcryptjs'
 import { BaseRepository } from '../../common/repository/base.repository'
 import { InjectBaseRepository } from '../../common/decorators/inject-base-repository.decorator'
 import { FindOptionsWhere, Like } from 'typeorm'
+import { Worker } from 'worker_threads'
 
 @Injectable()
 export class UserService {
@@ -35,84 +36,88 @@ export class UserService {
   async createFakeUser(): Promise<CreateUserDto> {
     const salt = await bcrypt.genSalt(10)
     return {
-      username: faker.internet.userName(),
+      username: faker.internet.username(),
       email: faker.internet.email(),
-      sex: faker.helpers.arrayElement(['male', 'female']),
+      sex: faker.person.sex(),
       password: await bcrypt.hash('123456', salt),
-      status: faker.helpers.arrayElement([true, false]),
+      status: faker.datatype.boolean(),
     }
   }
 
-  async seed() {
-    try {
-      const total = 10000000
-      const batchSize = 10000
-      const concurrentBatches = 8
-      let addedTotal = 0
-      const startTime = Date.now()
-      const processBatch = async (batchNumber: number) => {
-        const start = batchNumber * batchSize
-        const end = Math.min(start + batchSize, total)
-        const count = end - start
-        const batchUsers = this.generateFakeUsers(count)
+  // Inside the UserService class, add this new seeding method
+  async seedUsingWorkers(): Promise<void> {
+    const total = 10_000_000 // Total number of records to insert
+    const batchSize = 10_000 // Number of records per batch
+    const numberOfWorkers = 4 // Number of concurrent workers
+    let addedTotal = 0
 
-        await this.userRepository.transaction(async (entityManager) => {
-          const values = batchUsers.map((user) => `(UUID(), '${user.username}', '${user.email}', '${user.sex}', '${user.password}', ${user.status})`).join(',')
-          await entityManager.query(`
-              INSERT INTO user (usr_id, usr_username, usr_email, usr_sex, usr_password, usr_status)
-              VALUES ${values}
-          `)
+    const startTime = Date.now()
+
+    // Function to create a new worker and handle communication
+    const createWorker = (batchUsers: Array<CreateUserDto>): Promise<number> =>
+      new Promise((resolve, reject) => {
+        const worker = new Worker(require.resolve('./UserDataInserter'), {
+          workerData: batchUsers, // Truyền dữ liệu cho worker
         })
 
-        return count
+        worker.on('message', (message: { success: boolean; error?: string }) => {
+          if (message.success) {
+            resolve(batchUsers.length)
+          } else {
+            reject(new Error(message.error))
+          }
+        })
+
+        worker.on('error', reject)
+        worker.on('exit', (code) => {
+          if (code !== 0) reject(new Error(`Worker exited with code ${code}`))
+        })
+      })
+
+    // Loop through total records in chunks
+    for (let i = 0; i < total; i += batchSize * numberOfWorkers) {
+      const workerPromises = [] // Store promises for workers
+
+      // Spawn workers for each chunk
+      for (let j = 0; j < numberOfWorkers; j++) {
+        const start = i + j * batchSize
+        if (start >= total) break
+
+        const count = Math.min(batchSize, total - start)
+        const batchUsers = this.generateFakeUsers(count) // Generate fake users for this batch
+        workerPromises.push(createWorker(batchUsers))
       }
 
-      // Process batches concurrently
-      for (let i = 0; i < total; i += batchSize * concurrentBatches) {
-        const batchPromises = []
+      // Wait for all workers to finish their batches
+      const results = await Promise.all(workerPromises)
+      addedTotal += results.reduce((sum, count) => sum + count, 0)
 
-        // Start multiple batches concurrently
-        for (let j = 0; j < concurrentBatches && i + j * batchSize < total; j++) {
-          batchPromises.push(processBatch(Math.floor((i + j * batchSize) / batchSize)))
-        }
+      // Calculate and log progress
+      const elapsedMinutes = (Date.now() - startTime) / 1000 / 60
+      const recordsPerMinute = addedTotal / elapsedMinutes
+      const estimatedTotalMinutes = total / recordsPerMinute
+      const progress = (addedTotal / total) * 100
 
-        // Wait for all concurrent batches to complete
-        const results = await Promise.all(batchPromises)
-        addedTotal += results.reduce((sum, count) => sum + count, 0)
-
-        // Calculate and log progress
-        const elapsedMinutes = (Date.now() - startTime) / 1000 / 60
-        const recordsPerMinute = addedTotal / elapsedMinutes
-        const estimatedTotalMinutes = total / recordsPerMinute
-        const progress = (addedTotal / total) * 100
-
-        console.log(
-          `Progress: ${progress.toFixed(2)}% (${addedTotal}/${total}) | ` +
-            `Speed: ${Math.round(recordsPerMinute)} records/min | ` +
-            `Est. remaining: ${(estimatedTotalMinutes - elapsedMinutes).toFixed(1)} min`,
-        )
-      }
-
-      const totalMinutes = (Date.now() - startTime) / 1000 / 60
-      console.log(`Seeding completed in ${totalMinutes.toFixed(1)} minutes`)
-    } catch (error) {
-      console.error('Error during seeding:', error)
-      throw error
+      console.log(
+        `Progress: ${progress.toFixed(2)}% (${addedTotal}/${total}) | ` +
+          `Speed: ${Math.round(recordsPerMinute)} records/min | ` +
+          `Estimated time remaining: ${(estimatedTotalMinutes - elapsedMinutes).toFixed(1)} min`,
+      )
     }
+
+    console.log(`Seeding completed in ${(Date.now() - startTime) / 1000 / 60} minutes`)
   }
 
   // Optimized version that generates multiple users at once
   private generateFakeUsers(count: number): Array<CreateUserDto> {
-    // const salt = await bcrypt.genSalt(10)
     const users: CreateUserDto[] = []
     for (let i = 0; i < count; i++) {
       users.push({
         username: faker.internet.userName(),
         email: faker.internet.email(),
-        sex: faker.helpers.arrayElement(['male', 'female']),
-        // password: await bcrypt.hash('123456', salt),
+        sex: faker.person.sex(),
         password: 'Aa@12345',
-        status: faker.helpers.arrayElement([true, false]),
+        status: faker.datatype.boolean(),
       })
     }
     return users
