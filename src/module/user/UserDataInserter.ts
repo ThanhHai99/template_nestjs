@@ -13,8 +13,12 @@ const dataSource = new DataSource({
   entities: [User],
   synchronize: false,
   logging: false,
+  poolSize: 20,
   extra: {
-    connectionLimit: 50, // connection pooling
+    connectionLimit: 20, // connection pooling
+    multipleStatements: true,
+    connectTimeout: 60000, // Giữ tùy chọn này thay vì acquireTimeout
+    waitForConnections: true,
   },
 })
 
@@ -25,8 +29,8 @@ const insertData = async (users: Array<any>) => {
     const values = users.map((user) => `(UUID(), '${user.username}', '${user.email}', '${user.sex}', '${user.password}', ${user.status})`).join(',')
 
     await entityManager.query(`
-        INSERT INTO user (usr_id, usr_username, usr_email, usr_sex, usr_password, usr_status)
-        VALUES ${values}
+      INSERT INTO user (usr_id, usr_username, usr_email, usr_sex, usr_password, usr_status)
+      VALUES ${values}
     `)
   })
 }
