@@ -46,9 +46,9 @@ export class UserService {
 
   // Inside the UserService class, add this new seeding method
   async seedUsingWorkers(): Promise<void> {
-    const total = 10_000_000 // Total number of records to insert
-    const batchSize = 10_000 // Number of records per batch
-    const numberOfWorkers = 4 // Number of concurrent workers
+    const total = 10000000 // Total number of records to insert
+    const batchSize = 10000 // Number of records per batch
+    const numberOfWorkers = 8 // Number of concurrent workers
     let addedTotal = 0
 
     const startTime = Date.now()
@@ -72,6 +72,9 @@ export class UserService {
         worker.on('exit', (code) => {
           if (code !== 0) reject(new Error(`Worker exited with code ${code}`))
         })
+
+        // Gửi data qua postMessage thay vì workerData
+        worker.postMessage(batchUsers)
       })
 
     // Loop through total records in chunks

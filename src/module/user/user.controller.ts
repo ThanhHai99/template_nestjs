@@ -14,7 +14,7 @@ export class UserController {
 
   @Get('seed')
   seed() {
-    return this.userService.seed()
+    return this.userService.seedUsingWorkers()
   }
 
   @Get()
