@@ -78,7 +78,7 @@ ${\color{green}\textbf{Done}}$ &emsp;
 ## Version
 
 NestJS `v9.2.0`<br/>
-NodeJS `v21.5.0`<br/>
+NodeJS `v24.3.0`<br/>
 
 ## Description
 
