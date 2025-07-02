@@ -1,6 +1,6 @@
 import { parentPort } from 'worker_threads'
 import { DataSource } from 'typeorm'
-import { User } from './user.entity' // điều chỉnh tùy thuộc vào vị trí file
+import { User } from '../user.entity' // điều chỉnh tùy thuộc vào vị trí file
 
 // Tạo dataSource mới
 const dataSource = new DataSource({
@@ -14,6 +14,7 @@ const dataSource = new DataSource({
   synchronize: false,
   logging: false,
   poolSize: 20,
+  multipleStatements: true,
   extra: {
     connectionLimit: 20, // connection pooling
     multipleStatements: true,

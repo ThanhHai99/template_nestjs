@@ -36,9 +36,9 @@ export class UserService {
   async createFakeUser(): Promise<CreateUserDto> {
     const salt = await bcrypt.genSalt(10)
     return {
-      username: faker.internet.username(),
+      username: faker.internet.userName(),
       email: faker.internet.email(),
-      sex: faker.person.sex(),
+      sex: faker.person.sexType(),
       password: await bcrypt.hash('123456', salt),
       status: faker.datatype.boolean(),
     }
@@ -56,7 +56,7 @@ export class UserService {
     // Function to create a new worker and handle communication
     const createWorker = (batchUsers: Array<CreateUserDto>): Promise<number> =>
       new Promise((resolve, reject) => {
-        const worker = new Worker(require.resolve('./UserDataInserter'), {
+        const worker = new Worker(require.resolve('./worker/seed'), {
           workerData: batchUsers, // Truyền dữ liệu cho worker
         })
 
