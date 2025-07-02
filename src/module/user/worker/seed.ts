@@ -1,47 +1,20 @@
-import { parentPort } from 'worker_threads'
-import { DataSource } from 'typeorm'
-import { User } from '../user.entity' // điều chỉnh tùy thuộc vào vị trí file
+import { parentPort, workerData } from 'worker_threads'
+import { AppDataSource } from '../../../config/data-source'
+import { User } from '../user.entity'
 
-// Tạo dataSource mới
-const dataSource = new DataSource({
-  type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: 'root',
-  password: 'root',
-  database: 'nestjs',
-  entities: [User],
-  synchronize: false,
-  logging: false,
-  poolSize: 20,
-  multipleStatements: true,
-  extra: {
-    connectionLimit: 10, // connection pooling
-    multipleStatements: true,
-    connectTimeout: 60000, // Giữ tùy chọn này thay vì acquireTimeout
-    waitForConnections: true,
-  },
-})
-
-// Hàm để insert dữ liệu
-const insertData = async (users: Array<any>) => {
-  await dataSource.initialize()
-  await dataSource.transaction(async (entityManager) => {
-    const values = users.map((user) => `(UUID(), '${user.username}', '${user.email}', '${user.sex}', '${user.password}', ${user.status})`).join(',')
-
-    await entityManager.query(`
-      INSERT INTO user (usr_id, usr_username, usr_email, usr_sex, usr_password, usr_status)
-      VALUES ${values}
-    `)
-  })
+async function seedUsers(users: any[]) {
+  if (!AppDataSource.isInitialized) {
+    await AppDataSource.initialize()
+  }
+  const repo = AppDataSource.getRepository(User)
+  await repo.save(users)
 }
 
-// Lắng nghe Worker
-parentPort?.on('message', async (users) => {
+;(async () => {
   try {
-    await insertData(users)
-    parentPort?.postMessage({ success: true })
-  } catch (err) {
-    parentPort?.postMessage({ success: false, error: err.message })
+    await seedUsers(workerData)
+    parentPort.postMessage({ success: true })
+  } catch (error) {
+    parentPort.postMessage({ success: false, error: error.message })
   }
-})
+})()
