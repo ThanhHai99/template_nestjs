@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid'
 @Injectable()
 export class UserService {
   @InjectBaseRepository(User) private readonly userRepository: BaseRepository<User>
+
   constructor(private readonly dataSource: DataSource) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -48,34 +49,29 @@ export class UserService {
 
   async seedUsingWorkers(): Promise<void> {
     const total = 1_000_000 // 1 triệu records
-    const batchSize = 5_000 // Batch size
-    const maxConcurrency = 2 // Giảm concurrency để tránh quá tải
+    const batchSize = 50_000 // Batch size
+    const maxConcurrency = 8 // Giảm concurrency để tránh quá tải
     const startTime = Date.now()
 
     console.log(`Starting to seed ${total.toLocaleString()} records with max ${maxConcurrency} concurrent operations...`)
 
-    // Tạo connection pool config
-    const connectionConfig = {
+    // Tạo connection pool
+    const pool = mysql.createPool({
       host: '127.0.0.1',
       port: 3306,
       user: 'root',
       password: 'root',
       database: 'nestjs',
       multipleStatements: true,
-      // Tăng timeout để tránh connection bị đóng
-      acquireTimeout: 120000, // 2 minutes
-      timeout: 120000, // 2 minutes
-      reconnect: true,
-      // Giảm max_allowed_packet để tránh lỗi
-      maxAllowedPacket: 67108864, // 64MB
-    }
+      waitForConnections: true,
+      connectionLimit: maxConcurrency, // Giới hạn số connection bằng với maxConcurrency
+      queueLimit: 0,
+      // maxAllowedPacket: 67108864, // 64MB
+    })
 
     let addedTotal = 0
-    const semaphore = new Array(maxConcurrency).fill(null)
     let currentBatch = 0
-    const totalBatches = Math.ceil(total / batchSize)
 
-    // Xử lý từng batch một cách tuần tự nhưng với concurrency limited
     const processBatches = async (): Promise<void> => {
       const activeBatches: Promise<void>[] = []
 
@@ -83,10 +79,8 @@ export class UserService {
         const count = Math.min(batchSize, total - i)
         const batchIndex = currentBatch++
 
-        // Chờ nếu đã đạt max concurrency
         if (activeBatches.length >= maxConcurrency) {
           await Promise.race(activeBatches)
-          // Loại bỏ các batch đã hoàn thành
           for (let j = activeBatches.length - 1; j >= 0; j--) {
             const batch = activeBatches[j]
             if ((await Promise.race([batch, Promise.resolve('completed')])) === 'completed') {
@@ -95,92 +89,58 @@ export class UserService {
           }
         }
 
-        // Tạo batch mới
-        const batchPromise = this.processSingleBatch(connectionConfig, count, i, batchSize, batchIndex, totalBatches)
-          .then(() => {
+        const batchPromise = (async () => {
+          const connection = await pool.getConnection()
+          try {
+            await this.setupConnectionForBulkInsert(connection)
+            const users = this.generateBulkFakeUsers(count)
+            const subBatchSize = 1000
+            const subBatches = Math.ceil(count / subBatchSize)
+
+            await connection.beginTransaction()
+
+            for (let subBatch = 0; subBatch < subBatches; subBatch++) {
+              const startIdx = subBatch * subBatchSize
+              const endIdx = Math.min(startIdx + subBatchSize, count)
+              const subBatchUsers = users.slice(startIdx, endIdx)
+
+              const sql = this.buildInsertSQL(subBatchUsers)
+              await connection.execute(sql)
+            }
+
+            await connection.commit()
+
             addedTotal += count
             const percent = (addedTotal / total) * 100
             const elapsed = (Date.now() - startTime) / 1000
             const rate = Math.round(addedTotal / elapsed)
             console.log(`✅ Progress: ${addedTotal.toLocaleString()}/${total.toLocaleString()} (${percent.toFixed(1)}%) | Rate: ${rate.toLocaleString()} records/sec | Elapsed: ${elapsed.toFixed(1)}s`)
-          })
-          .catch((error) => {
+          } catch (error) {
+            await connection.rollback()
             console.error(`❌ Batch ${batchIndex + 1} failed:`, error.message)
             throw error
-          })
+          } finally {
+            connection.release() // Trả connection về pool
+          }
+        })()
 
         activeBatches.push(batchPromise)
       }
 
-      // Đợi tất cả batches hoàn thành
       await Promise.all(activeBatches)
     }
 
     try {
       await processBatches()
+      await pool.end() // Đóng pool sau khi hoàn thành
 
       const totalTime = (Date.now() - startTime) / 1000
       const rate = Math.round(total / totalTime)
       console.log(`🎉 Seeding completed! ${total.toLocaleString()} records in ${totalTime.toFixed(1)}s (${rate.toLocaleString()} records/sec)`)
     } catch (error) {
+      await pool.end() // Đảm bảo pool được đóng ngay cả khi có lỗi
       console.error('❌ Seeding failed:', error)
       throw error
-    }
-  }
-
-  private async processSingleBatch(connectionConfig: any, count: number, startIndex: number, batchSize: number, batchIndex: number, totalBatches: number): Promise<void> {
-    const batchStartTime = Date.now()
-    let connection: mysql.Connection | null = null
-
-    try {
-      // Tạo connection mới cho mỗi batch
-      connection = await mysql.createConnection(connectionConfig)
-
-      // Setup connection cho bulk insert
-      await this.setupConnectionForBulkInsert(connection)
-
-      // Generate data
-      const users = this.generateBulkFakeUsers(count)
-
-      // Chia nhỏ batch nếu quá lớn để tránh max_allowed_packet
-      const subBatchSize = 1000 // Chia nhỏ thành 1000 records mỗi sub-batch
-      const subBatches = Math.ceil(count / subBatchSize)
-
-      await connection.beginTransaction()
-
-      for (let subBatch = 0; subBatch < subBatches; subBatch++) {
-        const startIdx = subBatch * subBatchSize
-        const endIdx = Math.min(startIdx + subBatchSize, count)
-        const subBatchUsers = users.slice(startIdx, endIdx)
-
-        const sql = this.buildInsertSQL(subBatchUsers)
-        await connection.execute(sql)
-      }
-
-      await connection.commit()
-
-      const elapsed = (Date.now() - batchStartTime) / 1000
-      const rate = Math.round(count / elapsed)
-      console.log(`📦 Batch ${batchIndex + 1}/${totalBatches}: ${count.toLocaleString()} records in ${elapsed.toFixed(2)}s (${rate.toLocaleString()} records/sec)`)
-    } catch (error) {
-      console.error(`❌ Error in batch ${batchIndex + 1}:`, error.message)
-
-      if (connection) {
-        try {
-          await connection.rollback()
-        } catch (rollbackError) {
-          console.error('Rollback failed:', rollbackError.message)
-        }
-      }
-      throw error
-    } finally {
-      if (connection) {
-        try {
-          await connection.end()
-        } catch (endError) {
-          console.error('Connection end failed:', endError.message)
-        }
-      }
     }
   }
 
@@ -225,7 +185,8 @@ export class UserService {
       })
       .join(',')
 
-    return `INSERT INTO user (usr_id, usr_username, usr_email, usr_sex, usr_password, usr_status) VALUES ${values}`
+    return `INSERT INTO user (usr_id, usr_username, usr_email, usr_sex, usr_password, usr_status)
+            VALUES ${values}`
   }
 
   // Tối ưu hóa việc sinh dữ liệu fake
