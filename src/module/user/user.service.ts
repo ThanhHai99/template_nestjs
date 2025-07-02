@@ -49,8 +49,8 @@ export class UserService {
 
   async seedUsingWorkers(): Promise<void> {
     const total = 1_000_000 // 1 triệu records
-    const batchSize = 50_000 // Batch size
-    const maxConcurrency = 8 // Giảm concurrency để tránh quá tải
+    const batchSize = 5_000 // Batch size
+    const maxConcurrency = 4 // Giảm concurrency để tránh quá tải
     const startTime = Date.now()
 
     console.log(`Starting to seed ${total.toLocaleString()} records with max ${maxConcurrency} concurrent operations...`)
