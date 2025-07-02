@@ -47,7 +47,7 @@ export class UserService {
   // Inside the UserService class, add this new seeding method
   async seedUsingWorkers(): Promise<void> {
     const total = 1000000 // Total number of records to insert
-    const batchSize = 1000 // Number of records per batch
+    const batchSize = 10000 // Number of records per batch
     const numberOfWorkers = 4 // Number of concurrent workers
     let addedTotal = 0
 
