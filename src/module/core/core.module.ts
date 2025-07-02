@@ -29,7 +29,7 @@ import configuration from '../../config/configuration'
         collation: 'utf8mb4_unicode_ci',
         logging: false,
         extra: {
-          connectionLimit: 20,
+          connectionLimit: 10,
           queueLimit: 0,
           waitForConnections: true,
           // Add performance optimizations for bulk insert

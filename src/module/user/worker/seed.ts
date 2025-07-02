@@ -16,7 +16,7 @@ const dataSource = new DataSource({
   poolSize: 20,
   multipleStatements: true,
   extra: {
-    connectionLimit: 20, // connection pooling
+    connectionLimit: 10, // connection pooling
     multipleStatements: true,
     connectTimeout: 60000, // Giữ tùy chọn này thay vì acquireTimeout
     waitForConnections: true,
